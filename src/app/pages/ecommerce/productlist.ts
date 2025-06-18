@@ -1,90 +1,63 @@
-import {CommonModule} from '@angular/common';
-import {Component} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {ButtonModule} from 'primeng/button';
-import {InputNumberModule} from 'primeng/inputnumber';
-import {RippleModule} from 'primeng/ripple';
-import {TabsModule} from 'primeng/tabs';
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { RippleModule } from 'primeng/ripple';
+import { TabsModule } from 'primeng/tabs';
+
+interface Product {
+    id: string;
+    name: string;
+    description: string;
+    price: number;
+    category: string;
+    image: string;
+    rating: number;
+}
 
 @Component({
     selector: 'app-product-list',
     imports: [CommonModule, FormsModule, InputNumberModule, ButtonModule, RippleModule, TabsModule],
     template: `
         <div class="card">
-            <div class="text-surface-900 dark:text-surface-0 font-medium text-4xl mb-6">Popular Products</div>
-            <p class="mt-0 p-0 mb-8 text-surface-700 dark:text-surface-100 text-2xl">Exclusive Selection</p>
+            <div class="text-surface-900 dark:text-surface-0 font-medium text-4xl mb-6">Produits Populaires</div>
+            <p class="mt-0 p-0 mb-8 text-surface-700 dark:text-surface-100 text-2xl">Sélection Exclusive</p>
             <div class="grid grid-cols-12 gap-4 -mt-4 -ml-4 -mr-4">
                 <div class="col-span-12 md:col-span-6 lg:col-span-4" *ngFor="let product of products">
                     <div class="p-2">
-                        <div class="shadow p-6 bg-surface-0 dark:bg-surface-900 rounded">
+                        <div class="shadow p-6 bg-surface-0 dark:bg-surface-900 rounded h-[550px] flex flex-col">
                             <div class="relative mb-4">
-                                <span class="bg-surface-0 dark:bg-surface-900 text-surface-900 dark:text-surface-0 shadow px-4 py-2 absolute rounded-3xl" style="left: 1rem; top: 1rem">Category</span>
-                                <img [src]="product.image" class="w-full" />
-                            </div>
-                            <div class="flex justify-between items-center mb-4">
-                                <span class="text-surface-900 dark:text-surface-0 font-medium text-xl">Product Name</span>
-                                <span>
-                                    <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
-                                    <span class="font-medium">5.0</span>
+                                <span
+                                    class="bg-surface-0 dark:bg-surface-900 text-surface-900 dark:text-surface-0 shadow px-4 py-2 absolute rounded-3xl"
+                                    style="left: 1rem; top: 1rem"
+                                >
+                                    {{ product.category }}
                                 </span>
+                                <img [src]="product.image" [alt]="product.name" style="width: 100%; height: 300px; object-fit: contain; background: #fff; border-radius: 8px;" />
                             </div>
-                            <p class="mt-0 mb-4 text-surface-700 dark:text-surface-100 leading-normal">Enim nec dui nunc mattis enim ut tellus. Tincidunt arcu.</p>
-                            <span class="text-primary text-xl font-medium">{{ product.price }}</span>
+                            <div class="flex-1 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex justify-between items-center mb-2 mt-2">
+                                        <span class="text-surface-900 dark:text-surface-0 font-medium text-xl block truncate max-h-12">{{ product.name }}</span>
+                                        <span>
+                                            <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
+                                            <span class="font-medium">{{ product.rating }}</span>
+                                        </span>
+                                    </div>
+                                    <p class="mt-0 mb-2 text-surface-700 dark:text-surface-100 leading-normal text-sm overflow-hidden" style="max-height: 40px;">{{ product.description }}</p>
+                                    <span class="text-primary text-xl font-medium block mb-2">{{ product.price}} MAD</span>
+                                </div>
+                                <button
+                                    type="button"
+                                    pRipple
+                                    class="border border-primary rounded py-2 px-4 bg-primary text-white inline-flex items-center justify-center hover:bg-primary-600 transition-colors duration-300 cursor-pointer w-full mt-2"
+                                >
+                                    <i class="pi pi-shopping-cart mr-2 text-base"></i>
+                                    <span class="text-base">Ajouter au panier</span>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="grid grid-cols-12 gap-4 -mt-4 -ml-4 -mr-4">
-                <div class="col-span-12 md:col-span-6 lg:col-span-3 mb-8 lg:mb-0" *ngFor="let product of products2">
-                    <div class="mb-4 relative">
-                        <img [src]="product.image" class="w-full" />
-                        <button
-                            type="button"
-                            pRipple
-                            class="border !border-white rounded py-2 px-4 !absolute !bg-black/30 !text-white inline-flex items-center justify-center hover:bg-black/40 transition-colors duration-300 cursor-pointer"
-                            style="bottom: 1rem; left: 1rem; width: calc(100% - 2rem)"
-                        >
-                            <i class="pi pi-shopping-cart mr-4 text-base"></i>
-                            <span class="text-base">Add to Cart</span>
-                        </button>
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <span class="text-xl text-surface-900 dark:text-surface-0 font-medium mb-4">Product Name</span>
-                        <span class="text-xl text-surface-900 dark:text-surface-0 mb-4">$150.00</span>
-                        <div class="flex items-center mb-4">
-                            <div
-                                class="w-8 h-8 flex-shrink-0 rounded-full bg-slate-500 mr-4 cursor-pointer border-2 border-surface-200 dark:border-surface-700 transition-all duration-300"
-                                [ngStyle]="{
-                                    'box-shadow': product.color === 'Bluegray' ? '0 0 0 0.2rem var(--p-gray-500)' : null
-                                }"
-                                (click)="product.color = 'Bluegray'"
-                            ></div>
-                            <div
-                                class="w-8 h-8 flex-shrink-0 rounded-full bg-indigo-500 hover:border-indigo-500 mr-4 cursor-pointer border-2 border-surface-200 dark:border-surface-700 transition-all duration-300"
-                                [ngStyle]="{
-                                    'box-shadow': product.color === 'Indigo' ? '0 0 0 0.2rem var(--p-indigo-500)' : null
-                                }"
-                                (click)="product.color = 'Indigo'"
-                            ></div>
-                            <div
-                                class="w-8 h-8 flex-shrink-0 rounded-full bg-purple-500 hover:border-purple-500 mr-4 cursor-pointer border-2 border-surface-200 dark:border-surface-700 transition-all duration-300"
-                                [ngStyle]="{
-                                    'box-shadow': product.color === 'Purple' ? '0 0 0 0.2rem var(--p-purple-500)' : null
-                                }"
-                                (click)="product.color = 'Purple'"
-                            ></div>
-                            <div
-                                class="w-8 h-8 flex-shrink-0 rounded-full bg-cyan-500 hover:border-cyan-500 cursor-pointer border-2 border-surface-200 dark:border-surface-700 transition-all duration-300"
-                                [ngStyle]="{
-                                    'box-shadow': product.color === 'Cyan' ? '0 0 0 0.2rem var(--p-cyan-500)' : null
-                                }"
-                                (click)="product.color = 'Cyan'"
-                            ></div>
-                        </div>
-                        <span class="text-surface-700 dark:text-surface-100">{{ product.color }}</span>
                     </div>
                 </div>
             </div>
@@ -92,51 +65,132 @@ import {TabsModule} from 'primeng/tabs';
     `
 })
 export class ProductList {
-    color1: string = 'Bluegray';
-
-    products = [
+    products: Product[] = [
         {
-            price: '$140.00',
-            image: '/demo/images/ecommerce/product-list/product-list-4-1.png'
+            id: "1",
+            name: "Apple MacBook Air 13\" (M4)",
+            description: "Ultraléger, puissant avec puce Apple M4 et écran Retina.",
+            price: 14299,
+            category: "Informatique",
+            image: "https://media.electroplanet.ma/media/catalog/product/cache/fe7218fa206f7a550a07f49b9ea052d6/3/0/3081764-cb-38350_1.png",
+            rating: 5
         },
         {
-            price: '$82.00',
-            image: '/demo/images/ecommerce/product-list/product-list-4-2.png'
+            id: "2",
+            name: "ELEXIA TV LED 43EAFD-C24 43\" SMART",
+            description: "Téléviseur intelligent avec affichage Full HD.",
+            price: 2499,
+            category: "Téléviseur",
+            image: "https://media.electroplanet.ma/media/catalog/product/cache/fe7218fa206f7a550a07f49b9ea052d6/5/0/50eaud-d24-50ka1-1.jpg",
+            rating: 4
         },
         {
-            price: '$54.00',
-            image: '/demo/images/ecommerce/product-list/product-list-4-3.png'
+            id: "3",
+            name: "BEKO SBS GN156320XP NF 564L INOX",
+            description: "Réfrigérateur side-by-side grande capacité.",
+            price: 10590,
+            category: "Gros électroménager",
+            image: "https://media.electroplanet.ma/media/catalog/product/cache/fe7218fa206f7a550a07f49b9ea052d6/3/0/3077679-cb-36841_1.png",
+            rating: 4
         },
         {
-            price: '$72.00',
-            image: '/demo/images/ecommerce/product-list/product-list-4-4.png'
+            id: "4",
+            name: "BOSCH TC SERIE 8 PRS9A6B70 90CM NOIR",
+            description: "Table de cuisson performante et design.",
+            price: 3999,
+            category: "Gros électroménager",
+            image: "https://media.electroplanet.ma/media/catalog/product/cache/fe7218fa206f7a550a07f49b9ea052d6/3/0/3037333-cb-22408_1.png",
+            rating: 4
         },
         {
-            price: '$99.00',
-            image: '/demo/images/ecommerce/product-list/product-list-4-5.png'
+            id: "5",
+            name: "BEKO MACHINE A CAFE FILTRE CFM 7353 I",
+            description: "Machine à café filtre compacte et performante.",
+            price: 499,
+            category: "Petit électroménager",
+            image: "https://media.electroplanet.ma/media/catalog/product/cache/fe7218fa206f7a550a07f49b9ea052d6/3/0/3076592-cb-31638_1.png",
+            rating: 5
         },
         {
-            price: '$89.00',
-            image: '/demo/images/ecommerce/product-list/product-list-4-6.png'
-        }
-    ];
-
-    products2 = [
-        {
-            color: 'Bluegray',
-            image: '/demo/images/ecommerce/product-list/product-list-2-1.png'
+            id: "6",
+            name: "BEKO BLENDER TBN 81808 BX 800W",
+            description: "Blender avec bol en verre 1.75L, 800W.",
+            price: 599,
+            category: "Petit électroménager",
+            image: "https://media.electroplanet.ma/media/catalog/product/cache/fe7218fa206f7a550a07f49b9ea052d6/3/0/3076598-cb-31706_1.png",
+            rating: 3
         },
         {
-            color: 'Indigo',
-            image: '/demo/images/ecommerce/product-list/product-list-2-2.png'
+            id: "7",
+            name: "MICROPHONE ORYX POUR IPHONE",
+            description: "Annulation du bruit, réception sonore en temps réel.",
+            price: 240,
+            category: "Accessoires smartphone",
+            image: "https://electrobousfiha.com/34848-large_default/-microphone-sans-fil-w-mic.jpg",
+            rating: 5
         },
         {
-            color: 'Purple',
-            image: '/demo/images/ecommerce/product-list/product-list-2-3.png'
+            id: "8",
+            name: "CASQUE BLUETOOTH SONY WH-CH520/LZ BLEU",
+            description: "Casque sans fil avec réduction de bruit avancée.",
+            price: 589,
+            category: "Audio",
+            image: "https://electrobousfiha.com/36973-home_default/casque-bluetooth-sony-wh-ch520lz-bleu.jpg",
+            rating: 5
         },
         {
-            color: 'Cyan',
-            image: '/demo/images/ecommerce/product-list/product-list-2-4.png'
+            id: "9",
+            name: "IMPRIMANTE CANON 3EN1 COULEUR",
+            description: "Imprimante multifonction jet d'encre couleur.",
+            price: 429,
+            category: "Informatique",
+            image: "https://electrobousfiha.com/29769-home_default/imprimante-canon-3en1-couleur.jpg",
+            rating: 4
+        },
+        {
+            id: "10",
+            name: "SUPPORT TV SCHNEIDER FIXE MM 26-65P",
+            description: "Support mural fixe pour TV 26 à 65 pouces.",
+            price: 99,
+            category: "Accessoires TV",
+            image: "https://electrobousfiha.com/37928-home_default/support-tv-schneider-fixe-mm-26-65p.jpg",
+            rating: 4
+        },
+        {
+            id: "11",
+            name: "Samsung Galaxy S24 Ultra",
+            description: "Smartphone Android premium avec S Pen intégré.",
+            price: 12999,
+            category: "Smartphone",
+            image: "https://websitephotosa.blob.core.windows.net/photos/CataloguePhotos/49835/f627faca-ce44-4a8d-9a21-c750ac91d308.WEBP",
+            rating: 5
+        },
+        {
+            id: "12",
+            name: "MacBook Air 13\" M1 256G Space Grey",
+            description: "MacBook Air puce M1, 8 cœurs CPU et GPU.",
+            price: 10999,
+            category: "Informatique",
+            image: "https://websitephotosa.blob.core.windows.net/photos/CataloguePhotos/49406/89b30474-e3d7-487b-ad71-b34099cb561e.WEBP",
+            rating: 5
+        },
+        {
+            id: "13",
+            name: "FER A REPASSER TAURUS BALTIC 2200W",
+            description: "Fer à repasser performant pour usage domestique.",
+            price: 199,
+            category: "Petit électroménager",
+            image: "https://websitephotosa.blob.core.windows.net/photos/CataloguePhotos/48714/e55755a2-1242-45d2-a4c2-d92ed777a3e3.WEBP",
+            rating: 5
+        },
+        {
+            id: "14",
+            name: "TABLE A REPASSER TAURUS ARGENTA BLACK",
+            description: "Table à repasser design et fonctionnelle.",
+            price: 399,
+            category: "Maison",
+            image: "https://websitephotosa.blob.core.windows.net/photos/CataloguePhotos/7806/e393ef80-e558-474c-b125-d96bc497b216.JPG",
+            rating: 4
         }
     ];
 }
