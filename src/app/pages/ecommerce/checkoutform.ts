@@ -36,12 +36,19 @@ import {SelectModule} from 'primeng/select';
                                 <label class="ml-2" for="checkbox-1">Email me with news and offers</label>
                             </div>
                         </div>
+                        <div class="col-span-12 mb-12">
+                            <span class="text-surface-900 dark:text-surface-0 text-2xl block font-medium mb-8">Loan information</span>
+                            <label for="interestRate" class="block text-sm font-medium text-gray-800 dark:text-white mb-2">Interest rate</label>
+                            <input id="interestRate" type="text" class="p-inputtext w-full mb-6" [value]="interest + '%'" disabled />
+                            <label for="months" class="block text-sm font-medium text-gray-800 dark:text-white mb-2">Months</label>
+                            <input id="months" type="number" (input)="validateDuration($event)" class="p-inputtext w-full mb-6" [(ngModel)]="months" min="1"/>
+                        </div>
                         <div class="col-span-12 mb-6">
                             <span class="text-surface-900 dark:text-surface-0 text-2xl block font-medium mb-8">Shipping</span>
                             <p-select [options]="cities" [(ngModel)]="selectedCity" placeholder="Country / City" optionLabel="name" [showClear]="true" styleClass="w-full"></p-select>
                         </div>
                         <div class="col-span-12 lg:col-span-6 mb-6">
-                            <input id="name" placeholder="Name" type="text" class="p-inputtext w-full" />
+                            <input id="name" placeholder="Name" type="text" class="p-inputtext w-full" />""
                         </div>
                         <div class="col-span-12 lg:col-span-6 mb-6">
                             <input id="lastname" placeholder="Last Name" type="text" class="p-inputtext w-full" />
@@ -119,9 +126,10 @@ import {SelectModule} from 'primeng/select';
                             <span class="text-surface-900 dark:text-surface-0 font-medium text-xl">$123.00</span>
                         </div>
                     </div>
-                    <div class="py-2 mt-4 bg-yellow-100 flex items-center justify-center rounded">
-                        <img src="/demo/images/ecommerce/shop/flag.png" class="mr-2" alt="Country Flag" />
-                        <span class="text-black/90 font-medium">No additional duties or taxes.</span>
+                    <hr class="border-t border-gray-300 dark:border-gray-700 my-2" />
+                    <div class="py-2 mt-4 flex items-center justify-between rounded">
+                        <span class="text-surface-900 dark:text-surface-0 font-bold">Montly payment</span>
+                        <span class="text-surface-900 dark:text-surface-0 font-medium text-xl">$ {{calculateLoan(amount, interest, months)}}</span>
                     </div>
                 </div>
             </div>
@@ -137,6 +145,10 @@ export class CheckoutForm {
 
     checked2: boolean = true;
 
+    amount: number = 123;
+    interest: number = 5;
+    months: number = 12;
+
     cities = [
         { name: 'USA / New York', code: 'NY' },
         { name: 'Italy / Rome', code: 'RM' },
@@ -146,4 +158,22 @@ export class CheckoutForm {
     ];
 
     selectedCity: string = '';
+
+    calculateLoan(amount: number, interest: number, months: number) {
+        const monthlyRate = (interest / 100) / 12;
+        const monthlyPayment = (amount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
+        return monthlyPayment.toFixed(2);
+    }
+
+    validateDuration(event: Event) {
+        const input = event.target as HTMLInputElement;
+        let value = parseInt(input.value);
+        if (value < 1 || isNaN(value)) {
+            input.value = "1";
+            this.months = 1;
+        }
+        else {
+            this.months = value;
+        }
+    }
 }
