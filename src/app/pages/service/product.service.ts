@@ -1,5 +1,6 @@
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from "rxjs";
 
 interface InventoryStatus {
     label: string;
@@ -19,8 +20,25 @@ export interface Product {
     rating?: number;
 }
 
-@Injectable()
+
+export interface Product2 {
+    id: string;
+    name: string;
+    description: string;
+    price: number;
+    category: string;
+    image: string;
+    rating: number;
+}
+@Injectable({
+    providedIn: 'root'
+})
 export class ProductService {
+    private apiUrl = 'http://localhost:3001/products';
+
+    getProductList(): Observable<Product2[]> {
+        return this.http.get<Product2[]>(this.apiUrl);
+    }
     getProductsData() {
         return [
             {
@@ -1255,7 +1273,7 @@ export class ProductService {
         'Yoga Set'
     ];
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
     getProductsMini() {
         return Promise.resolve(this.getProductsData().slice(0, 5));
