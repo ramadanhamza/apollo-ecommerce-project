@@ -47,12 +47,12 @@ interface Product {
                                 </span>
                             </div>
                                     <p class="mt-0 mb-2 text-surface-700 dark:text-surface-100 leading-normal text-sm overflow-hidden" style="max-height: 40px;">{{ product.description }}</p>
-                                    <span class="text-primary text-xl font-medium block mb-2">{{ product.price | currency:'MAD':'symbol':'1.0-0' }}</span>
+                                    <span class="text-primary text-xl font-medium block mb-1">{{ product.price | currency:'MAD':'symbol':'1.0-0' }}</span>
         </div>
                         <button
                             type="button"
                             pRipple
-                                    class="border border-primary rounded py-2 px-4 bg-primary text-white inline-flex items-center justify-center hover:bg-primary-600 transition-colors duration-300 cursor-pointer w-full mt-2"
+                                    class="border border-primary rounded py-2 px-4 bg-primary text-white inline-flex items-center justify-center hover:bg-primary-600 transition-colors duration-300 cursor-pointer w-full"
                         >
                                     <i class="pi pi-shopping-cart mr-2 text-base"></i>
                                     <span class="text-base">Ajouter au panier</span>
