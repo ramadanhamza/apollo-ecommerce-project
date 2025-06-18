@@ -40,15 +40,17 @@ import {SelectModule} from 'primeng/select';
                             <span class="text-surface-900 dark:text-surface-0 text-2xl block font-medium mb-8">Loan information</span>
                             <label for="interestRate" class="block text-sm font-medium text-gray-800 dark:text-white mb-2">Interest rate</label>
                             <input id="interestRate" type="text" class="p-inputtext w-full mb-6" [value]="interest + '%'" disabled />
-                            <label for="months" class="block text-sm font-medium text-gray-800 dark:text-white mb-2">Months</label>
-                            <input id="months" type="number" (input)="validateDuration($event)" class="p-inputtext w-full mb-6" [(ngModel)]="months" min="1"/>
+                            <label for="borrowAmount" class="block text-sm font-medium mb-1">Amount to borrow : <span id="borrowAmount">{{borrowAmount}}</span></label>
+                            <input id="borrowAmount" type="range" min="1" [max]="amount" [(ngModel)]="borrowAmount" class="w-full mb-4" />
+                            <label for="months" class="block text-sm font-medium mb-1">Months : <span id="months">{{months}}</span></label>
+                            <input id="months" type="range" min="6" max="60" [(ngModel)]="months" class="w-full mb-4" />
                         </div>
                         <div class="col-span-12 mb-6">
                             <span class="text-surface-900 dark:text-surface-0 text-2xl block font-medium mb-8">Shipping</span>
                             <p-select [options]="cities" [(ngModel)]="selectedCity" placeholder="Country / City" optionLabel="name" [showClear]="true" styleClass="w-full"></p-select>
                         </div>
                         <div class="col-span-12 lg:col-span-6 mb-6">
-                            <input id="name" placeholder="Name" type="text" class="p-inputtext w-full" />""
+                            <input id="name" placeholder="Name" type="text" class="p-inputtext w-full" />
                         </div>
                         <div class="col-span-12 lg:col-span-6 mb-6">
                             <input id="lastname" placeholder="Last Name" type="text" class="p-inputtext w-full" />
@@ -128,8 +130,12 @@ import {SelectModule} from 'primeng/select';
                     </div>
                     <hr class="border-t border-gray-300 dark:border-gray-700 my-2" />
                     <div class="py-2 mt-4 flex items-center justify-between rounded">
+                        <span class="text-surface-900 dark:text-surface-0 font-bold">Upfront payment</span>
+                        <span class="text-surface-900 dark:text-surface-0 font-medium text-xl">$ {{amount - borrowAmount}}</span>
+                    </div>
+                    <div class="py-2 mt-4 flex items-center justify-between rounded">
                         <span class="text-surface-900 dark:text-surface-0 font-bold">Montly payment</span>
-                        <span class="text-surface-900 dark:text-surface-0 font-medium text-xl">$ {{calculateLoan(amount, interest, months)}}</span>
+                        <span class="text-surface-900 dark:text-surface-0 font-medium text-xl">$ {{calculateLoan(borrowAmount, interest, months)}}</span>
                     </div>
                 </div>
             </div>
@@ -146,6 +152,7 @@ export class CheckoutForm {
     checked2: boolean = true;
 
     amount: number = 123;
+    borrowAmount: number = this.amount / 2;
     interest: number = 5;
     months: number = 12;
 
@@ -159,9 +166,9 @@ export class CheckoutForm {
 
     selectedCity: string = '';
 
-    calculateLoan(amount: number, interest: number, months: number) {
+    calculateLoan(borrowAmount: number, interest: number, months: number) {
         const monthlyRate = (interest / 100) / 12;
-        const monthlyPayment = (amount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
+        const monthlyPayment = (borrowAmount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
         return monthlyPayment.toFixed(2);
     }
 
