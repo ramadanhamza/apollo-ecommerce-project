@@ -5,6 +5,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { RippleModule } from 'primeng/ripple';
 import { TabsModule } from 'primeng/tabs';
+import { PaginatorModule } from 'primeng/paginator';
 
 interface Product {
     id: string;
@@ -18,13 +19,13 @@ interface Product {
 
 @Component({
     selector: 'app-product-list',
-    imports: [CommonModule, FormsModule, InputNumberModule, ButtonModule, RippleModule, TabsModule],
+    imports: [CommonModule, FormsModule, InputNumberModule, ButtonModule, RippleModule, TabsModule, PaginatorModule],
     template: `
         <div class="card">
             <div class="text-surface-900 dark:text-surface-0 font-medium text-4xl mb-6">Produits Populaires</div>
             <p class="mt-0 p-0 mb-8 text-surface-700 dark:text-surface-100 text-2xl">Sélection Exclusive</p>
             <div class="grid grid-cols-12 gap-4 -mt-4 -ml-4 -mr-4">
-                <div class="col-span-12 md:col-span-6 lg:col-span-4" *ngFor="let product of products">
+                <div class="col-span-12 md:col-span-6 lg:col-span-4" *ngFor="let product of paginatedProducts">
                     <div class="p-2">
                         <div class="shadow p-6 bg-surface-0 dark:bg-surface-900 rounded h-[550px] flex flex-col">
                             <div class="relative mb-4">
@@ -40,26 +41,34 @@ interface Product {
                                 <div>
                                     <div class="flex justify-between items-center mb-2 mt-2">
                                         <span class="text-surface-900 dark:text-surface-0 font-medium text-xl block truncate max-h-12">{{ product.name }}</span>
-                                        <span>
-                                            <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
+                                <span>
+                                    <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
                                             <span class="font-medium">{{ product.rating }}</span>
-                                        </span>
-                                    </div>
+                                </span>
+                            </div>
                                     <p class="mt-0 mb-2 text-surface-700 dark:text-surface-100 leading-normal text-sm overflow-hidden" style="max-height: 40px;">{{ product.description }}</p>
-                                    <span class="text-primary text-xl font-medium block mb-2">{{ product.price}} MAD</span>
-                                </div>
-                                <button
-                                    type="button"
-                                    pRipple
+                                    <span class="text-primary text-xl font-medium block mb-2">{{ product.price | currency:'MAD':'symbol':'1.0-0' }}</span>
+        </div>
+                        <button
+                            type="button"
+                            pRipple
                                     class="border border-primary rounded py-2 px-4 bg-primary text-white inline-flex items-center justify-center hover:bg-primary-600 transition-colors duration-300 cursor-pointer w-full mt-2"
-                                >
+                        >
                                     <i class="pi pi-shopping-cart mr-2 text-base"></i>
                                     <span class="text-base">Ajouter au panier</span>
-                                </button>
-                            </div>
+                        </button>
+                    </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="flex justify-center mt-8">
+                <p-paginator
+                    [rows]="rowsPerPage"
+                    [totalRecords]="products.length"
+                    [first]="currentPage * rowsPerPage"
+                    (onPageChange)="onPageChange($event)"
+                ></p-paginator>
             </div>
         </div>
     `
@@ -193,4 +202,16 @@ export class ProductList {
             rating: 4
         }
     ];
+
+    currentPage: number = 0;
+    rowsPerPage: number = 6;
+
+    get paginatedProducts() {
+        const start = this.currentPage * this.rowsPerPage;
+        return this.products.slice(start, start + this.rowsPerPage);
+    }
+
+    onPageChange(event: any) {
+        this.currentPage = event.page;
+    }
 }
