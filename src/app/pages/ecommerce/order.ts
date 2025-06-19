@@ -31,14 +31,14 @@ import { CardModule } from 'primeng/card';
     ],
     template: `
         <div class="p-6 bg-gradient-to-br from-blue-50 dark:from-surface-900 dark:to-surface-800 min-h-screen">
-            <!-- Header Section -->
+            <!-- En-tête -->
             <div class="mb-8">
                 <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
                     <div>
-                        <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-2">My orders</h1>
-                        <p class="text-lg text-gray-600 dark:text-gray-300">Track and manage your recent purchases</p>
+                        <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-2">Mes commandes</h1>
+                        <p class="text-lg text-gray-600 dark:text-gray-300">Suivez vos achats récents</p>
                         <div class="flex items-center gap-4 mt-4">
-                            <p-chip label="{{orders.length}} Orders" styleClass="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"></p-chip>
+                            <p-chip label="{{orders.length}} Commandes" styleClass="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"></p-chip>
                             <p-chip
                                 [label]="getDeliveryStatusText()"
                                 [icon]="getDeliveryStatusIcon()"
@@ -53,33 +53,33 @@ import { CardModule } from 'primeng/card';
                             <input
                                 type="text"
                                 pInputText
-                                placeholder="Search orders..."
+                                placeholder="Rechercher des commandes..."
                                 class="w-full bg-white dark:bg-surface-700 border-gray-200 dark:border-surface-600 rounded-xl"
                             />
                         </p-iconfield>
                         <p-button
                             icon="pi pi-filter"
-                            label="Filter"
+                            label="Filtrer"
                             styleClass="p-button-outlined border-gray-300 text-gray-700 dark:border-surface-600 dark:text-surface-200 rounded-xl"
                         ></p-button>
                     </div>
                 </div>
             </div>
 
-            <!-- Orders Timeline -->
+            <!-- Chronologie des commandes -->
             <div class="space-y-8">
                 <div *ngFor="let order of orders; let orderIndex = index"
                      class="relative">
 
-                    <!-- Timeline Line (except for last item) -->
+                    <!-- Ligne de chronologie (sauf pour le dernier élément) -->
                     <div *ngIf="orderIndex !== orders.length - 1"
                          class="absolute left-8 top-20 w-0.5 h-full bg-gradient-to-b from-blue-200 to-gray-200 dark:from-blue-800 dark:to-surface-600 z-0">
                     </div>
 
-                    <!-- Order Card -->
+                    <!-- Carte de commande -->
                     <div class="relative bg-white dark:bg-surface-800 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
 
-                        <!-- Order Header -->
+                        <!-- En-tête de commande -->
                         <div class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-6">
                             <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
                                 <div class="flex items-center gap-4">
@@ -87,14 +87,14 @@ import { CardModule } from 'primeng/card';
                                         <i class="pi pi-receipt text-2xl"></i>
                                     </div>
                                     <div>
-                                        <h3 class="text-xl font-semibold">Order #{{order.orderNumber}}</h3>
+                                        <h3 class="text-xl font-semibold">Commande n°{{order.orderNumber}}</h3>
                                         <p class="text-blue-100">{{order.orderDate}}</p>
                                     </div>
                                 </div>
 
                                 <div class="text-right">
                                     <div class="text-2xl font-bold">{{order.amount}}</div>
-                                    <div class="text-blue-100">{{order.products.length}} items</div>
+                                    <div class="text-blue-100">{{order.products.length}} articles</div>
                                     <div class="mt-2">
                                         <p-chip
                                             [label]="getOrderStatusText(order)"
@@ -106,7 +106,7 @@ import { CardModule } from 'primeng/card';
                             </div>
                         </div>
 
-                        <!-- Products Grid -->
+                        <!-- Grille de produits -->
                         <div class="p-6">
                             <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
                                 <div *ngFor="let product of order.products"
@@ -145,7 +145,7 @@ import { CardModule } from 'primeng/card';
                                                 <span class="font-bold text-lg text-gray-900 dark:text-white">{{product.price}}</span>
                                                 <p-button
                                                     icon="pi pi-shopping-cart"
-                                                    label="Buy Again"
+                                                    label="Acheter à nouveau"
                                                     size="small"
                                                     styleClass="p-button-outlined p-button-sm text-blue-600 border-blue-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 text-xs"
                                                 ></p-button>
@@ -160,51 +160,19 @@ import { CardModule } from 'primeng/card';
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Action Bar -->
-                        <div class="border-t border-gray-200 dark:border-surface-600 bg-gray-50 dark:bg-surface-700/50 px-6 py-4">
-                            <div class="flex flex-wrap gap-3">
-                                <p-button
-                                    icon="pi pi-download"
-                                    label="Download Invoice"
-                                    size="small"
-                                    styleClass="p-button-outlined border-gray-300 text-gray-700 dark:border-surface-500 dark:text-surface-200 hover:bg-gray-100 dark:hover:bg-surface-600"
-                                ></p-button>
-
-                                <p-button
-                                    icon="pi pi-refresh"
-                                    label="Return Items"
-                                    size="small"
-                                    styleClass="p-button-outlined border-orange-300 text-orange-700 dark:border-orange-500 dark:text-orange-300 hover:bg-orange-50 dark:hover:bg-orange-900/20"
-                                ></p-button>
-
-                                <p-button
-                                    icon="pi pi-star"
-                                    label="Write Review"
-                                    size="small"
-                                    styleClass="p-button-outlined border-yellow-300 text-yellow-700 dark:border-yellow-500 dark:text-yellow-300 hover:bg-yellow-50 dark:hover:bg-yellow-900/20"
-                                ></p-button>
-
-                                <p-button
-                                    icon="pi pi-ellipsis-h"
-                                    size="small"
-                                    styleClass="p-button-text text-gray-500 hover:bg-gray-100 dark:hover:bg-surface-600 ml-auto"
-                                ></p-button>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Empty State (if no orders) -->
+            <!-- État vide (si aucune commande) -->
             <div *ngIf="orders.length === 0" class="text-center py-16">
                 <div class="bg-white dark:bg-surface-800 rounded-2xl p-12 max-w-md mx-auto">
                     <div class="w-24 h-24 bg-gray-100 dark:bg-surface-700 rounded-full mx-auto mb-6 flex items-center justify-center">
                         <i class="pi pi-shopping-bag text-4xl text-gray-400"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">No Orders Yet</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-6">Start shopping to see your orders here</p>
-                    <p-button label="Start Shopping" icon="pi pi-arrow-right" styleClass="bg-blue-500 hover:bg-blue-600"></p-button>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Aucune commande pour l'instant</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6">Commencez vos achats pour voir vos commandes ici</p>
+                    <p-button label="Commencer les achats" icon="pi pi-arrow-right" styleClass="bg-blue-500 hover:bg-blue-600"></p-button>
                 </div>
             </div>
         </div>
@@ -234,104 +202,104 @@ export class Order {
     orders = [
         {
             orderNumber: '45123',
-            orderDate: 'February 7, 2023',
-            amount: '$123.00',
+            orderDate: '7 février 2023',
+            amount: '123.00 MAD',
             products: [
                 {
-                    name: 'Premium Wireless Headphones with Noise Cancellation',
-                    color: 'Black',
-                    size: 'One Size',
-                    price: '$50.00',
-                    deliveryDate: 'Delivered on Feb 7, 2023',
+                    name: 'Casque audio premium sans fil avec réduction de bruit',
+                    color: 'Noir',
+                    size: 'Taille unique',
+                    price: '50.00 MAD',
+                    deliveryDate: 'Livré le 7 fév. 2023',
                     image: '/demo/images/ecommerce/order-history/orderhistory-1.png'
                 },
                 {
-                    name: 'Smart Fitness Tracker with Heart Rate Monitor',
-                    color: 'Blue',
-                    size: 'Medium',
-                    price: '$50.00',
-                    deliveryDate: 'Delivered on Feb 7, 2023',
+                    name: 'Tracker d\'activité intelligent avec moniteur de fréquence cardiaque',
+                    color: 'Bleu',
+                    size: 'Moyen',
+                    price: '50.00 MAD',
+                    deliveryDate: 'Livré le 7 fév. 2023',
                     image: '/demo/images/ecommerce/order-history/orderhistory-2.png'
                 },
                 {
-                    name: 'Ergonomic Wireless Mouse for Gaming',
-                    color: 'Red',
+                    name: 'Souris sans fil ergonomique pour gaming',
+                    color: 'Rouge',
                     size: 'Standard',
-                    price: '$23.00',
-                    deliveryDate: 'Delivered on Feb 7, 2023',
+                    price: '23.00 MAD',
+                    deliveryDate: 'Livré le 7 fév. 2023',
                     image: '/demo/images/ecommerce/order-history/orderhistory-3.png'
                 }
             ]
         },
         {
             orderNumber: '45126',
-            orderDate: 'February 9, 2023',
-            amount: '$250.00',
+            orderDate: '9 février 2023',
+            amount: '250.00 MAD',
             products: [
                 {
-                    name: 'Professional Laptop Stand with Cooling Fan',
-                    color: 'Silver',
-                    size: 'Universal',
-                    price: '$80.00',
-                    deliveryDate: 'Delivered on Feb 9, 2023',
+                    name: 'Support pour ordinateur portable professionnel avec ventilateur de refroidissement',
+                    color: 'Argent',
+                    size: 'Universel',
+                    price: '80.00 MAD',
+                    deliveryDate: 'Livré le 9 fév. 2023',
                     image: '/demo/images/ecommerce/order-history/orderhistory-4.png'
                 },
                 {
-                    name: 'Mechanical Keyboard with RGB Lighting',
-                    color: 'Black',
-                    size: 'Full Size',
-                    price: '$120.00',
-                    deliveryDate: 'Delivered on Feb 9, 2023',
+                    name: 'Clavier mécanique avec éclairage RGB',
+                    color: 'Noir',
+                    size: 'Plein format',
+                    price: '120.00 MAD',
+                    deliveryDate: 'Livré le 9 fév. 2023',
                     image: '/demo/images/ecommerce/order-history/orderhistory-5.png'
                 },
                 {
-                    name: 'HD Webcam with Auto Focus',
-                    color: 'Black',
+                    name: 'Webcam HD avec mise au point automatique',
+                    color: 'Noir',
                     size: '1080p',
-                    price: '$50.00',
-                    deliveryDate: 'Delivered on Feb 9, 2023',
+                    price: '50.00 MAD',
+                    deliveryDate: 'Livré le 9 fév. 2023',
                     image: '/demo/images/ecommerce/order-history/orderhistory-6.png'
                 }
             ]
         },
         {
             orderNumber: '45130',
-            orderDate: 'March 5, 2023',
-            amount: '$199.00',
+            orderDate: '5 mars 2023',
+            amount: '199.00 MAD',
             products: [
                 {
-                    name: '4K Ultra HD Monitor',
-                    color: 'Black',
-                    size: '27-inch',
-                    price: '$199.00',
-                    deliveryDate: 'Expected by Jun 25, 2025',
+                    name: 'Moniteur Ultra HD 4K',
+                    color: 'Noir',
+                    size: '27 pouces',
+                    price: '199.00 MAD',
+                    deliveryDate: 'Prévu pour le 25 juin 2025',
                     image: '/demo/images/ecommerce/order-history/orderhistory-6.png'
                 }
             ]
         }
     ];
 
-    // Helper method to check if a product is delivered
+    // Vérifie si un produit est livré
     isProductDelivered(product: any): boolean {
-        return product.deliveryDate.toLowerCase().includes('delivered');
+        return product.deliveryDate.toLowerCase().includes('livré');
     }
 
-    // Helper method to check if an order is fully delivered
+    // Vérifie si une commande est entièrement livrée
     isOrderDelivered(order: any): boolean {
         return order.products.every((product: any) => this.isProductDelivered(product));
     }
 
-    // Helper method to get delivery status for individual orders
+    // Obtient le statut de livraison pour les commandes individuelles
     getOrderStatusText(order: any): string {
         const deliveredCount = order.products.filter((product: any) => this.isProductDelivered(product)).length;
         const totalCount = order.products.length;
 
         if (deliveredCount === totalCount) {
-            return 'Delivered';
+            return 'Livré';
         } else if (deliveredCount === 0) {
-            return 'Pending';
+            return 'En attente';
         } else {
-            return `${deliveredCount}/${totalCount} Delivered`;
+            return `${deliveredCount}/${totalCount} Livrés`;
         }
     }
 
@@ -361,17 +329,17 @@ export class Order {
         }
     }
 
-    // Helper methods for overall delivery status
+    // Méthodes pour le statut global de livraison
     getDeliveryStatusText(): string {
         const deliveredOrders = this.orders.filter(order => this.isOrderDelivered(order)).length;
         const totalOrders = this.orders.length;
 
         if (deliveredOrders === totalOrders) {
-            return 'All Delivered';
+            return 'Tous livrés';
         } else if (deliveredOrders === 0) {
-            return 'All Pending';
+            return 'Tous en attente';
         } else {
-            return `${deliveredOrders}/${totalOrders} Delivered`;
+            return `${deliveredOrders}/${totalOrders} Livrés`;
         }
     }
 
