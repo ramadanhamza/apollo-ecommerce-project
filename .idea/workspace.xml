@@ -5,9 +5,168 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a31a09ca-d0b7-488f-810a-0c75386b5308" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/app/pages/ecommerce/order.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/@primeng_themes.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/@primeng_themes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/_metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/_metadata.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-24OYF6U4.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-24OYF6U4.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-2Z2TNJCU.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-2Z2TNJCU.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-2ZHPP7MF.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-2ZHPP7MF.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-37EUB3HO.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-37EUB3HO.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-42AZFPMN.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-42AZFPMN.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-4V2INO7P.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-4V2INO7P.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-74JPDVWP.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-74JPDVWP.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-A7CQNBKK.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-A7CQNBKK.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-C3HEIRXY.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-C3HEIRXY.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-DT4HYCBD.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-DT4HYCBD.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-ECPNWKPI.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-ECPNWKPI.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-EWISHCW3.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-EWISHCW3.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-GVN7R3GW.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-GVN7R3GW.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-HAPH7YMG.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-HAPH7YMG.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-I43G2UUO.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-I43G2UUO.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-IUX4VKA5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-IUX4VKA5.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-KHTELJV6.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-KHTELJV6.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-LVZO54S7.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-LVZO54S7.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-M3J4V6A6.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-M3J4V6A6.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-OIA4WF5T.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-OIA4WF5T.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-OTVM6VUU.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-OTVM6VUU.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-P56EGZOX.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-P56EGZOX.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-QDJ4ZYJP.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-QDJ4ZYJP.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-QVVFDKQP.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-QVVFDKQP.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-RZA232EL.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-RZA232EL.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-SBBT5MLG.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-SBBT5MLG.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-SRDTYX7Z.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-SRDTYX7Z.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-VEIYLGKH.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-VEIYLGKH.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-WHR5EV2W.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-WHR5EV2W.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-XT56F4VB.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-XT56F4VB.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-XZR2PXYS.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-XZR2PXYS.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-YJTAEW6L.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-YJTAEW6L.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-ZYI4TNRU.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/chunk-ZYI4TNRU.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_accordion.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_accordion.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_api.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_autocomplete.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_autocomplete.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_avatar.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_avatar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_avatargroup.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_avatargroup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_badge.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_badge.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_breadcrumb.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_breadcrumb.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_button.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_button.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_buttongroup.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_buttongroup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_card.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_card.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_carousel.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_carousel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_chart.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_chart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_checkbox.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_checkbox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_chip.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_chip.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_colorpicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_colorpicker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_config.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_confirmdialog.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_confirmdialog.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_confirmpopup.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_confirmpopup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_contextmenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_contextmenu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_dataview.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_dataview.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_datepicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_datepicker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_dialog.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_dialog.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_divider.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_divider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_drawer.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_drawer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_editor.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_editor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_fieldset.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_fieldset.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_fileupload.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_fileupload.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_floatlabel.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_floatlabel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_fluid.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_fluid.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_galleria.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_galleria.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_iconfield.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_iconfield.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_iftalabel.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_iftalabel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_image.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_image.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_imagecompare.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_imagecompare.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_inplace.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_inplace.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_inputgroup.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_inputgroup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_inputgroupaddon.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_inputgroupaddon.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_inputicon.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_inputicon.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_inputnumber.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_inputnumber.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_inputotp.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_inputotp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_inputtext.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_inputtext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_knob.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_knob.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_listbox.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_listbox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_megamenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_megamenu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_menubar.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_menubar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_message.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_message.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_metergroup.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_metergroup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_multiselect.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_multiselect.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_orderlist.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_orderlist.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_overlaybadge.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_overlaybadge.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_overlaypanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_overlaypanel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_paginator.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_paginator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_panel.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_panel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_panelmenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_panelmenu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_password.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_password.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_picklist.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_picklist.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_popover.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_popover.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_progressbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_progressbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_radiobutton.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_radiobutton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_rating.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_rating.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_ripple.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_ripple.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_scroller.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_scroller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_scrollpanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_scrollpanel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_scrolltop.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_scrolltop.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_select.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_select.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_selectbutton.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_selectbutton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_skeleton.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_skeleton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_slider.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_slider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_splitbutton.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_splitbutton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_splitter.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_splitter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_stepper.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_stepper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_styleclass.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_styleclass.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_table.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_table.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_tabs.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_tabs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_tabview.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_tabview.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_tag.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_tag.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_textarea.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_textarea.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_tieredmenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_tieredmenu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_timeline.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_timeline.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_toast.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_toast.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_togglebutton.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_togglebutton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_toggleswitch.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_toggleswitch.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_toolbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_toolbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_tooltip.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_tooltip.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_tree.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_tree.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_treeselect.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_treeselect.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_treetable.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps/primeng_treetable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps_ssr/_metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/vite/deps_ssr/_metadata.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pages/ecommerce/productlist.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/ecommerce/productlist.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout/components/app.menu.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout/components/app.menu.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/ecommerce/ecommerce.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/ecommerce/ecommerce.routes.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +193,7 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/chaimae chakir/Desktop/apollo-ecommerce-project/src/app/pages/ecommerce&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -44,6 +204,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\chaimae chakir\Desktop\apollo-ecommerce-project\src\app\pages\ecommerce" />
+    </key>
+  </component>
   <component name="RunManager" selected="npm.Angular CLI Server">
     <configuration name="Angular Application" type="JavascriptDebugType" uri="http://localhost:4200">
       <method v="2" />
@@ -76,10 +241,23 @@
       <updated>1750243369089</updated>
       <workItem from="1750243375596" duration="3220000" />
       <workItem from="1750247459847" duration="5768000" />
+      <workItem from="1750331407257" duration="2432000" />
+      <workItem from="1750344087992" duration="1439000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

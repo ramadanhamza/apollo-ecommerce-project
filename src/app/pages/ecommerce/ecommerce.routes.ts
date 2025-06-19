@@ -12,6 +12,11 @@ export default [
         loadComponent: () => import('./productlist').then((c) => c.ProductList)
     },
     {
+        path: 'orders',
+        data: { breadcrumb: 'Orders' },
+        loadComponent: () => import('./order').then((c) => c.Order)
+    },
+    {
         path: 'new-product',
         data: { breadcrumb: 'New Product' },
         loadComponent: () => import('./newproduct').then((c) => c.NewProduct)

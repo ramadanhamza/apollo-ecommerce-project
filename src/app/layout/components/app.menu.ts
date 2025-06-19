@@ -342,6 +342,11 @@ export class AppMenu {
                         routerLink: ['ecommerce/product-list'],
                     },
                     {
+                        label: 'My orders',
+                        icon: 'pi pi-fw pi-shopping-cart',
+                        routerLink: ['ecommerce/orders'],
+                    },
+                    {
                         label: 'New Product',
                         icon: 'pi pi-fw pi-plus',
                         routerLink: ['ecommerce/new-product'],
