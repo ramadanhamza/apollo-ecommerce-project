@@ -8,10 +8,6 @@ export const appRoutes: Routes = [
         component: AppLayout,
         children: [
             {
-                path: 'pages',
-                loadChildren: () => import('@/pages/pages.routes'),
-            },
-            {
                 path: 'ecommerce',
                 loadChildren: () =>
                     import('@/pages/ecommerce/ecommerce.routes'),

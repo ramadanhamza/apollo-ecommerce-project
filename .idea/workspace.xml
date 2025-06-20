@@ -4,32 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a31a09ca-d0b7-488f-810a-0c75386b5308" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pages/ecommerce/productlist.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/ecommerce/productlist.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pages/service/country.service.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pages/service/customer.service.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pages/service/icon.service.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pages/service/member.service.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pages/service/node.service.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pages/service/photo.service.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pages/service/product.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/service/product.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/types/blog.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/types/chat.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/types/customer.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/types/file.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/types/folder.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/types/image.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/types/kanban.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/types/mail.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/types/member.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/types/message.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/types/metric.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/types/product.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/types/product.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/types/task.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/types/user.ts" beforeDir="false" />
-    </list>
+    <list default="true" id="a31a09ca-d0b7-488f-810a-0c75386b5308" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
