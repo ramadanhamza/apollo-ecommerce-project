@@ -65,17 +65,6 @@ export class AppMenu {
                         routerLink: ['ecommerce/order-summary'],
                     },
                 ],
-            },
-            {
-                label: 'User Management',
-                icon: 'pi pi-fw pi-user',
-                items: [
-                    {
-                        label: 'List',
-                        icon: 'pi pi-fw pi-list',
-                        routerLink: ['profile/list'],
-                    }
-                ],
             }
         ];
     }

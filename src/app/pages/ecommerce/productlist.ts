@@ -6,7 +6,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { RippleModule } from 'primeng/ripple';
 import { TabsModule } from 'primeng/tabs';
 import { PaginatorModule } from 'primeng/paginator';
-import { ProductService, Product2 } from "@/pages/service/product.service";
+import { ProductService, Product } from "@/pages/service/product.service";
 
 
 @Component({
@@ -66,7 +66,7 @@ import { ProductService, Product2 } from "@/pages/service/product.service";
     `
 })
 export class ProductList implements OnInit {
-    products!: Product2[];
+    products!: Product[];
     constructor(private productService: ProductService) {
     }
     ngOnInit() {

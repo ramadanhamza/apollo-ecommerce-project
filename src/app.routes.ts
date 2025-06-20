@@ -16,11 +16,7 @@ export const appRoutes: Routes = [
                 loadChildren: () =>
                     import('@/pages/ecommerce/ecommerce.routes'),
                 data: { breadcrumb: 'E-Commerce' },
-            },
-            {
-                path: 'profile',
-                loadChildren: () => import('@/pages/usermanagement/usermanagement.routes'),
-            },
+            }
         ],
     },
     { path: 'notfound', component: Notfound },
