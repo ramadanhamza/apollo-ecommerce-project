@@ -7,7 +7,108 @@
     <list default="true" id="a31a09ca-d0b7-488f-810a-0c75386b5308" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/19.1.8/apollo-ng/.tsbuildinfo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pages/ecommerce/order.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/ecommerce/order.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/apps.routes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/blog/blog.routes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/blog/detail.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/blog/edit.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/blog/list.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/chat/chatbox.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/chat/chatsidebar.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/chat/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/chat/service/chat.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/chat/usercard.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/files/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/files/service/file.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/files/uploader/uploader.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/kanban/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/kanban/kanbancard.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/kanban/kanbanlist.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/kanban/kanbansidebar.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/kanban/service/kanban.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/mail/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/mail/mail-archive.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/mail/mail-compose.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/mail/mail-detail.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/mail/mail-important.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/mail/mail-inbox.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/mail/mail-reply.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/mail/mail-sent.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/mail/mail-sidebar.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/mail/mail-spam.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/mail/mail-starred.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/mail/mail-table.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/mail/mail-trash.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/mail/mail.routes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/mail/service/mail.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/tasklist/create-task.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/tasklist/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/tasklist/service/task.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/apps/tasklist/task-list.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout/components/app.menu.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout/components/app.menu.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/aboutus/aboutus.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/auth/access.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/auth/auth.routes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/auth/error.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/auth/forgotpassword.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/auth/lockscreen.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/auth/login.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/auth/newpassword.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/auth/register.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/auth/verification.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/blocks/blocks.routes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/blocks/blocks.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/blocks/components/blockviewer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/contactus/contactus.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/crud/crud.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/dashboards/banking/headerwidget.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/dashboards/banking/monthlypaymentswidget.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/dashboards/banking/overviewwidget.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/dashboards/banking/recenttransactionstwowidget.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/dashboards/banking/recenttransactionswidget.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/dashboards/banking/statsbankingwidget.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/dashboards/bankingdashboard.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/dashboards/ecommerce/bestsellingwidget.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/dashboards/ecommerce/notificationswidget.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/dashboards/ecommerce/recentsaleswidget.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/dashboards/ecommerce/revenueoverviewwidget.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/dashboards/ecommerce/revenuestreamwidget.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/dashboards/ecommerce/salesbycategorywidget.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/dashboards/ecommerce/statswidget.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/dashboards/ecommerce/topproductswidget.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/dashboards/ecommercedashboard.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/documentation/documentation.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/empty/empty.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/faq/faq.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/help/help.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/invoice/invoice.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/landing/components/appswidget.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/landing/components/featureswidget.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/landing/components/footerwidget.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/landing/components/homewidget.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/landing/components/pricingwidget.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/landing/components/topbarwidget.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/landing/landing.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/my-mockups/user-profile/user-profile.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/pages.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/pages.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/uikit/buttondemo.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/uikit/chartdemo.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/uikit/filedemo.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/uikit/formlayoutdemo.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/uikit/inputdemo.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/uikit/listdemo.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/uikit/mediademo.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/uikit/menudemo.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/uikit/messagesdemo.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/uikit/miscdemo.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/uikit/overlaydemo.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/uikit/panelsdemo.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/uikit/tabledemo.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/uikit/timelinedemo.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/uikit/treedemo.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/uikit/uikit.routes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/usermanagement/usercreate.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/usermanagement/usermanagement.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/usermanagement/usermanagement.routes.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
