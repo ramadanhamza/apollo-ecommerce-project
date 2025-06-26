@@ -26,41 +26,41 @@ export class AppMenu {
     ngOnInit() {
         this.model = [
             {
-                label: 'E-Commerce',
+                label: 'E-Commerce', // (Peut rester en anglais ou être traduit par "Commerce électronique")
                 icon: 'pi pi-fw pi-wallet',
                 items: [
                     {
-                        label: 'Product List',
+                        label: 'Liste des produits',
                         icon: 'pi pi-fw pi-list',
                         routerLink: ['ecommerce/product-list'],
                     },
                     {
-                        label: 'Product Overview',
+                        label: 'Aperçu du produit',
                         icon: 'pi pi-fw pi-image',
                         routerLink: ['ecommerce/product-overview'],
                     },
                     {
-                        label: 'My orders',
+                        label: 'Mes commandes',
                         icon: 'pi pi-fw pi-shopping-cart',
                         routerLink: ['ecommerce/orders'],
                     },
                     {
-                        label: 'New Product',
+                        label: 'Nouveau produit',
                         icon: 'pi pi-fw pi-plus',
                         routerLink: ['ecommerce/new-product'],
                     },
                     {
-                        label: 'Shopping Cart',
+                        label: 'Panier',
                         icon: 'pi pi-fw pi-shopping-cart',
                         routerLink: ['ecommerce/shopping-cart'],
                     },
                     {
-                        label: 'Checkout Form',
+                        label: 'Formulaire de paiement',
                         icon: 'pi pi-fw pi-check-square',
                         routerLink: ['ecommerce/checkout-form'],
                     },
                     {
-                        label: 'Order Summary',
+                        label: 'Récapitulatif de commande',
                         icon: 'pi pi-fw pi-file',
                         routerLink: ['ecommerce/order-summary'],
                     },
