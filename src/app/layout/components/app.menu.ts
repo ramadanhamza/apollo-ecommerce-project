@@ -30,14 +30,14 @@ export class AppMenu {
                 icon: 'pi pi-fw pi-wallet',
                 items: [
                     {
-                        label: 'Product Overview',
-                        icon: 'pi pi-fw pi-image',
-                        routerLink: ['ecommerce/product-overview'],
-                    },
-                    {
                         label: 'Product List',
                         icon: 'pi pi-fw pi-list',
                         routerLink: ['ecommerce/product-list'],
+                    },
+                    {
+                        label: 'Product Overview',
+                        icon: 'pi pi-fw pi-image',
+                        routerLink: ['ecommerce/product-overview'],
                     },
                     {
                         label: 'My orders',
