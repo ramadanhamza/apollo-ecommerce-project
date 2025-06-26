@@ -74,7 +74,7 @@ import { StepsModule } from 'primeng/steps';
                         <div class="grid grid-cols-12 gap-4 mt-10">
                             <div class="col-span-12 flex justify-center">
                                 <div class="bg-white rounded shadow p-6 max-w-md w-full">
-                                    <span class="text-surface-900 dark:text-surface-0 text-2xl block font-medium mb-4">Upload Documents</span>
+                                    <span class="text-surface-900 dark:text-surface-0 text-2xl block font-medium mb-4">Téléversement des pièces</span>
                                     <p class="text-surface-600 dark:text-surface-200 mb-8">Veuillez téléverser les documents requis pour compléter votre demande.</p>
                                     <div class="flex flex-col gap-6">
                                         <!-- Pièce d'identité -->
