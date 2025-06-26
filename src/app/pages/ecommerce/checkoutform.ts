@@ -72,30 +72,35 @@ import { StepsModule } from 'primeng/steps';
 
                     <div *ngIf="currentStep === 2">
                         <div class="grid grid-cols-12 gap-4 mt-10">
-                            <div class="col-span-12">
-                                <span class="text-surface-900 dark:text-surface-0 text-2xl block font-medium mb-4">Upload Documents</span>
-                                <p class="text-surface-600 dark:text-surface-200 mb-8">To complete your application, please upload the required financial documents (e.g., payslips, bank statements).</p>
-                                <p-fileUpload
-                                    name="docs[]"
-                                    url="./upload"
-                                    (onUpload)="onUpload($event)"
-                                    [multiple]="true"
-                                    accept="image/*,application/pdf"
-                                    [maxFileSize]="5000000"
-                                    [showUploadButton]="false"
-                                    [showCancelButton]="false"
-                                >
-                                    <ng-template pTemplate="empty">
-                                        <div class="flex items-center justify-center flex-col p-4">
-                                            <i class="pi pi-cloud-upload border-2 rounded-full p-5 text-8xl text-surface-400 dark:text-surface-600 border-surface-400 dark:border-surface-600"></i>
-                                            <p class="mt-4 mb-0">Drag and drop files here to upload.</p>
+                            <div class="col-span-12 flex justify-center">
+                                <div class="bg-white rounded shadow p-6 max-w-md w-full">
+                                    <span class="text-surface-900 dark:text-surface-0 text-2xl block font-medium mb-4">Upload Documents</span>
+                                    <p class="text-surface-600 dark:text-surface-200 mb-8">Veuillez téléverser les documents requis pour compléter votre demande.</p>
+                                    <div class="flex flex-col gap-6">
+                                        <!-- Pièce d'identité -->
+                                        <div class="border rounded p-4 flex flex-col items-center">
+                                            <label class="font-semibold mb-2">Pièce d'identité</label>
+                                            <input type="file" (change)="onFileChange($event, 'idDoc')" accept=".pdf,.jpg,.png" />
+                                            
                                         </div>
-                                    </ng-template>
-                                </p-fileUpload>
+                                        <!-- Fiche de paie -->
+                                        <div class="border rounded p-4 flex flex-col items-center">
+                                            <label class="font-semibold mb-2">Fiche de paie</label>
+                                            <input type="file" (change)="onFileChange($event, 'payslip')" accept=".pdf,.jpg,.png" />
+                                            
+                                        </div>
+                                        <!-- Relevé bancaire -->
+                                        <div class="border rounded p-4 flex flex-col items-center">
+                                            <label class="font-semibold mb-2">Relevé bancaire</label>
+                                            <input type="file" (change)="onFileChange($event, 'bankStatement')" accept=".pdf,.jpg,.png" />
+                                            
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-span-12 flex flex-col lg:flex-row justify-between items-center my-12">
                                 <button pButton pRipple (click)="previousStep()" label="Précedent" icon="pi pi-fw pi-arrow-left" severity="secondary" class="w-full lg:w-auto"></button>
-                                <button pButton pRipple label="Finaliser la demande de financement" icon="pi pi-fw pi-check" class="w-full lg:w-auto mt-4 lg:mt-0"></button>
+                                <button pButton pRipple label="Finaliser la demande de financement" icon="pi pi-fw pi-check" class="w-full lg:w-auto mt-4 lg:mt-0" [disabled]="!allDocumentsUploaded()"></button>
                             </div>
                         </div>
                     </div>
@@ -176,7 +181,14 @@ export class CheckoutForm implements OnInit {
     ];
     selectedCity: string = '';
 
-    constructor(private messageService: MessageService) {}
+    idDocName: string = '';
+    payslipName: string = '';
+    bankStatementName: string = '';
+    idDocFile: File | null = null;
+    payslipFile: File | null = null;
+    bankStatementFile: File | null = null;
+
+    constructor(private messageService: MessageService) { }
 
     ngOnInit() {
         this.items = [
@@ -199,8 +211,24 @@ export class CheckoutForm implements OnInit {
         this.currentStep = 1;
     }
 
-    onUpload(event: any) {
-        this.messageService.add({ severity: 'info', summary: 'Success', detail: 'Files Uploaded Successfully' });
+    onFileChange(event: any, type: 'idDoc' | 'payslip' | 'bankStatement') {
+        const file = event.target.files[0];
+        if (file) {
+            if (type === 'idDoc') {
+                this.idDocFile = file;
+                this.idDocName = file.name;
+            } else if (type === 'payslip') {
+                this.payslipFile = file;
+                this.payslipName = file.name;
+            } else if (type === 'bankStatement') {
+                this.bankStatementFile = file;
+                this.bankStatementName = file.name;
+            }
+        }
+    }
+
+    allDocumentsUploaded(): boolean {
+        return !!(this.idDocFile && this.payslipFile && this.bankStatementFile);
     }
 
     calculateLoan(borrowAmount: number, interest: number, months: number) {
