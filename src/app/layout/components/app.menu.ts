@@ -26,43 +26,43 @@ export class AppMenu {
     ngOnInit() {
         this.model = [
             {
-                label: 'E-Commerce', // (Peut rester en anglais ou être traduit par "Commerce électronique")
+                label: 'Commerce électronique',
                 icon: 'pi pi-fw pi-wallet',
                 items: [
                     {
                         label: 'Liste des produits',
                         icon: 'pi pi-fw pi-list',
-                        routerLink: ['ecommerce/product-list'],
+                        routerLink: ['ecommerce/liste-produits'],
                     },
                     {
                         label: 'Aperçu du produit',
                         icon: 'pi pi-fw pi-image',
-                        routerLink: ['ecommerce/product-overview'],
+                        routerLink: ['ecommerce/apercu-produit'],
                     },
                     {
                         label: 'Mes commandes',
                         icon: 'pi pi-fw pi-shopping-cart',
-                        routerLink: ['ecommerce/orders'],
+                        routerLink: ['ecommerce/mes-commandes'],
                     },
                     {
                         label: 'Nouveau produit',
                         icon: 'pi pi-fw pi-plus',
-                        routerLink: ['ecommerce/new-product'],
+                        routerLink: ['ecommerce/nouveau-produit'],
                     },
                     {
                         label: 'Panier',
                         icon: 'pi pi-fw pi-shopping-cart',
-                        routerLink: ['ecommerce/shopping-cart'],
+                        routerLink: ['ecommerce/panier'],
                     },
                     {
-                        label: 'Formulaire de paiement',
+                        label: 'Paiement',
                         icon: 'pi pi-fw pi-check-square',
-                        routerLink: ['ecommerce/checkout-form'],
+                        routerLink: ['ecommerce/paiement'],
                     },
                     {
-                        label: 'Récapitulatif de commande',
+                        label: 'Résumé de la commande',
                         icon: 'pi pi-fw pi-file',
-                        routerLink: ['ecommerce/order-summary'],
+                        routerLink: ['ecommerce/resume-commande'],
                     },
                 ],
             }
