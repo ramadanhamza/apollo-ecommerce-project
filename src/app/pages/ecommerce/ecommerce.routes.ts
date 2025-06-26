@@ -8,42 +8,42 @@ export default [
     },
     {
         path: 'product-overview',
-        data: { breadcrumb: 'Product Overview' },
+        data: { breadcrumb: 'Aperçu du produit' },
         loadComponent: () => import('./productoverview').then((c) => c.ProductOverview)
     },
     {
         path: 'product-list',
-        data: { breadcrumb: 'Product List' },
+        data: { breadcrumb: 'Liste des produits' },
         loadComponent: () => import('./productlist').then((c) => c.ProductList)
     },
     {
         path: 'orders',
-        data: { breadcrumb: 'Orders' },
+        data: { breadcrumb: 'Mes commandes' },
         loadComponent: () => import('./order').then((c) => c.Order)
     },
     {
         path: 'new-product',
-        data: { breadcrumb: 'New Product' },
+        data: { breadcrumb: 'Nouveau produit' },
         loadComponent: () => import('./newproduct').then((c) => c.NewProduct)
     },
     {
         path: 'shopping-cart',
-        data: { breadcrumb: 'Shopping Cart' },
+        data: { breadcrumb: 'Panier' },
         loadComponent: () => import('./shoppingcart').then((c) => c.ShoppingCart)
     },
     {
         path: 'checkout-form',
-        data: { breadcrumb: 'Checkout Form' },
+        data: { breadcrumb: 'Paiement' },
         loadComponent: () => import('./checkoutform').then((c) => c.CheckoutForm)
     },
     {
         path: 'order-history',
-        data: { breadcrumb: 'Order History' },
+        data: { breadcrumb: 'Historique des commandes' },
         loadComponent: () => import('./orderhistory').then((c) => c.OrderHistory)
     },
     {
         path: 'order-summary',
-        data: { breadcrumb: 'Order Summary' },
+        data: { breadcrumb: 'Résumé de la commande' },
         loadComponent: () => import('./ordersummary').then((c) => c.OrderSummary)
     }
 ] as Routes;
