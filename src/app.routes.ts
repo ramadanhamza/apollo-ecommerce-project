@@ -7,6 +7,7 @@ export const appRoutes: Routes = [
         path: '',
         component: AppLayout,
         children: [
+            { path: '', pathMatch: 'full', redirectTo: 'ecommerce' },
             {
                 path: 'ecommerce',
                 loadChildren: () =>

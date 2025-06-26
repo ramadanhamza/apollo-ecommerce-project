@@ -1,6 +1,11 @@
-import {Routes} from '@angular/router';
+import { Routes } from '@angular/router';
 
 export default [
+    {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'product-list'
+    },
     {
         path: 'product-overview',
         data: { breadcrumb: 'Product Overview' },
