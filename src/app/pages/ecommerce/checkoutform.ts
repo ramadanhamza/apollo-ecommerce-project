@@ -1,109 +1,120 @@
-import {Component} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {ButtonModule} from 'primeng/button';
-import {CheckboxModule} from 'primeng/checkbox';
-import {InputGroupModule} from 'primeng/inputgroup';
-import {InputNumberModule} from 'primeng/inputnumber';
-import {InputTextModule} from 'primeng/inputtext';
-import {RippleModule} from 'primeng/ripple';
-import {SelectModule} from 'primeng/select';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MenuItem, MessageService } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+import { CheckboxModule } from 'primeng/checkbox';
+import { FileUploadModule } from 'primeng/fileupload';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputTextModule } from 'primeng/inputtext';
+import { RippleModule } from 'primeng/ripple';
+import { SelectModule } from 'primeng/select';
+import { ToastModule } from 'primeng/toast';
+import { StepsModule } from 'primeng/steps';
 
 @Component({
     selector: 'app-checkout-form',
-    imports: [ButtonModule, RippleModule, SelectModule, CheckboxModule, InputTextModule, InputNumberModule, InputGroupModule, CheckboxModule, FormsModule],
+    standalone: true,
+    imports: [
+        ButtonModule,
+        RippleModule,
+        SelectModule,
+        CheckboxModule,
+        InputTextModule,
+        InputNumberModule,
+        InputGroupModule,
+        FormsModule,
+        FileUploadModule,
+        ToastModule,
+        StepsModule,
+        CommonModule
+    ],
+    providers: [MessageService],
     template: `
+        <p-toast></p-toast>
+
         <div class="card">
             <div class="grid grid-cols-12 gap-4 grid-nogutter">
                 <div class="col-span-12 px-6 mt-6 md:mt-12 md:px-12">
                     <span class="text-surface-900 dark:text-surface-0 block font-bold text-xl">Checkout</span>
                 </div>
                 <div class="col-span-12 lg:col-span-6 h-full px-6 py-6 md:px-12">
-                    <ul class="flex list-none flex-wrap p-0 mb-12">
-                        <li class="flex items-center text-primary mr-2">
-                            Cart
-                            <i class="pi pi-chevron-right text-surface-500 dark:text-surface-300 text-xs ml-2"></i>
-                        </li>
-                        <li class="flex items-center text-surface-500 dark:text-surface-300 mr-2">Information<i class="pi pi-chevron-right text-surface-500 dark:text-surface-300 text-xs ml-2"></i></li>
-                        <li class="flex items-center text-surface-500 dark:text-surface-300 mr-2">Shipping<i class="pi pi-chevron-right text-surface-500 dark:text-surface-300 text-xs ml-2"></i></li>
-                        <li class="flex items-center text-surface-500 dark:text-surface-300 mr-2">Payment</li>
-                    </ul>
-                    <div class="grid grid-cols-12 gap-4">
-                        <div class="col-span-12 mb-12">
-                            <span class="text-surface-900 dark:text-surface-0 text-2xl block font-medium mb-8">Contact Information</span>
-                            <input id="email" placeholder="Email" type="text" class="p-inputtext w-full mb-6" />
-                            <div class="flex items-center">
-                                <p-checkbox name="checkbox-1" [(ngModel)]="checked" [binary]="true" inputId="id"></p-checkbox>
-                                <label class="ml-2" for="checkbox-1">Email me with news and offers</label>
+                    
+                <p-steps [model]="items" [activeIndex]="currentStep - 1" [readonly]="true" class="mb-12"></p-steps>
+
+                    <div *ngIf="currentStep === 1">
+                        <div class="grid grid-cols-12 gap-4 mt-10">
+                            <div class="col-span-12 mb-12">
+                                <span class="text-surface-900 dark:text-surface-0 text-2xl block font-medium mb-8">Informations du client</span>
+                                <input id="name" placeholder="Nom complet" type="text" class="p-inputtext w-full mb-6" />
+                                <input id="email" placeholder="Adresse e-mail" type="text" class="p-inputtext w-full mb-6" />
+                                <div class="flex items-center">
+                                    <p-checkbox name="checkbox-1" [(ngModel)]="checked" [binary]="true" inputId="id"></p-checkbox>
+                                    <label class="ml-2" for="checkbox-1">Recevoir des offres et actualités par e-mail</label>
+                                </div>
+                            </div>
+                            <div class="col-span-12 mb-12">
+                                <span class="text-surface-900 dark:text-surface-0 text-2xl block font-medium mb-8">	Informations sur le financement</span>
+                                <label for="interestRate" class="block text-sm font-medium text-gray-800 dark:text-white mb-2">Marge bénéficiaire (HT)</label>
+                                <input id="interestRate" type="text" class="p-inputtext w-full mb-6" [value]="interest + '%'" disabled />
+                                <label for="borrowAmount" class="block text-sm font-medium mb-1">Montant financé : <span id="borrowAmount">{{ borrowAmount }}</span></label>
+                                <input id="borrowAmount" type="range" min="1" [max]="amount" [(ngModel)]="borrowAmount" class="w-full mb-4" />
+                                <label for="months" class="block text-sm font-medium mb-1">Durée du financement : <span id="months">{{ months }}</span></label>
+                                <input id="months" type="range" min="6" max="60" [(ngModel)]="months" class="w-full mb-4" />
+                            </div>
+                            <div class="col-span-12 flex flex-col lg:flex-row justify-center items-center lg:justify-end my-12">
+                                <button pButton pRipple class="mt-4 lg:mt-0 w-full lg:w-auto order-2 lg:order-1 lg:mr-6" severity="secondary" label="Retour au panier" icon="pi pi-fw pi-arrow-left"></button>
+                                <button pButton pRipple class="w-full lg:w-auto order-1 lg:order-2" (click)="nextStep()" label="Continuer vers les documents" icon="pi pi-fw pi-arrow-right" iconPos="right"></button>
                             </div>
                         </div>
-                        <div class="col-span-12 mb-12">
-                            <span class="text-surface-900 dark:text-surface-0 text-2xl block font-medium mb-8">Loan information</span>
-                            <label for="interestRate" class="block text-sm font-medium text-gray-800 dark:text-white mb-2">Interest rate</label>
-                            <input id="interestRate" type="text" class="p-inputtext w-full mb-6" [value]="interest + '%'" disabled />
-                            <label for="borrowAmount" class="block text-sm font-medium mb-1">Amount to borrow : <span id="borrowAmount">{{borrowAmount}}</span></label>
-                            <input id="borrowAmount" type="range" min="1" [max]="amount" [(ngModel)]="borrowAmount" class="w-full mb-4" />
-                            <label for="months" class="block text-sm font-medium mb-1">Months : <span id="months">{{months}}</span></label>
-                            <input id="months" type="range" min="6" max="60" [(ngModel)]="months" class="w-full mb-4" />
-                        </div>
-                        <div class="col-span-12 mb-6">
-                            <span class="text-surface-900 dark:text-surface-0 text-2xl block font-medium mb-8">Shipping</span>
-                            <p-select [options]="cities" [(ngModel)]="selectedCity" placeholder="Country / City" optionLabel="name" [showClear]="true" styleClass="w-full"></p-select>
-                        </div>
-                        <div class="col-span-12 lg:col-span-6 mb-6">
-                            <input id="name" placeholder="Name" type="text" class="p-inputtext w-full" />
-                        </div>
-                        <div class="col-span-12 lg:col-span-6 mb-6">
-                            <input id="lastname" placeholder="Last Name" type="text" class="p-inputtext w-full" />
-                        </div>
-                        <div class="col-span-12 mb-6">
-                            <input id="address" placeholder="Address" type="text" class="p-inputtext w-full" />
-                        </div>
-                        <div class="col-span-12 mb-6">
-                            <input id="address2" placeholder="Apartment, suite, etc" type="text" class="p-inputtext w-full" />
-                        </div>
-                        <div class="col-span-12 lg:col-span-6 mb-6">
-                            <input id="pc" placeholder="Postal Code" type="text" class="p-inputtext w-full" />
-                        </div>
-                        <div class="col-span-12 lg:col-span-6 mb-6">
-                            <input id="city" placeholder="City" type="text" class="p-inputtext w-full" />
-                        </div>
-                        <div class="col-span-12 lg:col-span-6 mb-6">
-                            <div class="flex items-center">
-                                <p-checkbox name="checkbox-2" [(ngModel)]="checked2" [binary]="true" inputId="id"></p-checkbox>
-                                <label class="ml-2" for="checkbox-2">Save for next purchase</label>
+                    </div>
+
+                    <div *ngIf="currentStep === 2">
+                        <div class="grid grid-cols-12 gap-4 mt-10">
+                            <div class="col-span-12">
+                                <span class="text-surface-900 dark:text-surface-0 text-2xl block font-medium mb-4">Upload Documents</span>
+                                <p class="text-surface-600 dark:text-surface-200 mb-8">To complete your application, please upload the required financial documents (e.g., payslips, bank statements).</p>
+                                <p-fileUpload
+                                    name="docs[]"
+                                    url="./upload"
+                                    (onUpload)="onUpload($event)"
+                                    [multiple]="true"
+                                    accept="image/*,application/pdf"
+                                    [maxFileSize]="5000000"
+                                    [showUploadButton]="false"
+                                    [showCancelButton]="false"
+                                >
+                                    <ng-template pTemplate="empty">
+                                        <div class="flex items-center justify-center flex-col p-4">
+                                            <i class="pi pi-cloud-upload border-2 rounded-full p-5 text-8xl text-surface-400 dark:text-surface-600 border-surface-400 dark:border-surface-600"></i>
+                                            <p class="mt-4 mb-0">Drag and drop files here to upload.</p>
+                                        </div>
+                                    </ng-template>
+                                </p-fileUpload>
                             </div>
-                        </div>
-                        <div class="col-span-12 flex flex-col lg:flex-row justify-center items-center lg:justify-end my-12">
-                            <button pButton pRipple class="mt-4 lg:mt-0 w-full lg:w-auto order-2 lg:order-1 lg:mr-6" severity="secondary" label="Return to Cart" icon="pi pi-fw pi-arrow-left"></button>
-                            <button pButton pRipple class="w-full lg:w-auto order-1 lg:order-2" label="Continue to Shipping" icon="pi pi-fw pi-check"></button>
+                            <div class="col-span-12 flex flex-col lg:flex-row justify-between items-center my-12">
+                                <button pButton pRipple (click)="previousStep()" label="Précedent" icon="pi pi-fw pi-arrow-left" severity="secondary" class="w-full lg:w-auto"></button>
+                                <button pButton pRipple label="Finaliser la demande de financement" icon="pi pi-fw pi-check" class="w-full lg:w-auto mt-4 lg:mt-0"></button>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-span-12 lg:col-span-6 px-6 py-6 md:px-12">
                     <div class="pb-4 border-surface-200 dark:border-surface-700">
-                        <span class="text-surface-900 dark:text-surface-0 font-medium text-xl">Your Cart</span>
+                        <span class="text-surface-900 dark:text-surface-0 font-medium text-xl">Votre panier</span>
                     </div>
                     <div class="flex flex-col lg:flex-row flex-wrap lg:items-center py-2 mt-4 border-surface-200 dark:border-surface-700">
                         <img src="/demo/images/ecommerce/shop/shop-1.png" class="w-32 h-32 flex-shrink-0 mb-4" alt="product" />
                         <div class="flex-auto lg:ml-4">
                             <div class="flex items-center justify-between mb-4">
-                                <span class="text-surface-900 dark:text-surface-0 font-bold">Product Name</span>
-                                <span class="text-surface-900 dark:text-surface-0 font-bold">$123.00</span>
+                                <span class="text-surface-900 dark:text-surface-0 font-bold">Nom du produit</span>
+                                <span class="text-surface-900 dark:text-surface-0 font-bold">123.00 MAD</span>
                             </div>
                             <div class="text-surface-600 dark:text-surface-200 text-sm mb-4">Black | Large</div>
                             <div class="flex flex-auto justify-between items-center">
-                                <p-inputNumber
-                                    [showButtons]="true"
-                                    buttonLayout="horizontal"
-                                    [min]="0"
-                                    inputStyleClass="!w-10 text-center border-transparent outline-0 shadow-none"
-                                    [(ngModel)]="quantities[0]"
-                                    styleClass="border border-surface-200 dark:border-surface-700 rounded"
-                                    decrementButtonClass="p-button-text text-surface-600 dark:text-surface-200 hover:text-primary py-1 px-1"
-                                    incrementButtonClass="p-button-text text-surface-600 dark:text-surface-200 hover:text-primary py-1 px-1"
-                                    incrementButtonIcon="pi pi-plus"
-                                    decrementButtonIcon="pi pi-minus"
-                                ></p-inputNumber>
+                                <p-inputNumber [showButtons]="true" buttonLayout="horizontal" [min]="0" inputStyleClass="!w-10 text-center border-transparent outline-0 shadow-none" [(ngModel)]="quantities[0]" styleClass="border border-surface-200 dark:border-surface-700 rounded" decrementButtonClass="p-button-text text-surface-600 dark:text-surface-200 hover:text-primary py-1 px-1" incrementButtonClass="p-button-text text-surface-600 dark:text-surface-200 hover:text-primary py-1 px-1" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"></p-inputNumber>
                                 <button pButton pRipple icon="pi pi-trash" text rounded></button>
                             </div>
                         </div>
@@ -116,41 +127,41 @@ import {SelectModule} from 'primeng/select';
                     </div>
                     <div class="py-2 mt-4">
                         <div class="flex justify-between items-center mb-4">
-                            <span class="text-surface-900 dark:text-surface-0 font-medium">Subtotal</span>
-                            <span class="text-surface-900 dark:text-surface-0">$123.00</span>
+                            <span class="text-surface-900 dark:text-surface-0 font-medium">Sous-total</span>
+                            <span class="text-surface-900 dark:text-surface-0">123.00 MAD</span>
                         </div>
                         <div class="flex justify-between items-center mb-4">
-                            <span class="text-surface-900 dark:text-surface-0 font-medium">Shipping</span>
-                            <span class="text-primary font-bold">Free</span>
+                            <span class="text-surface-900 dark:text-surface-0 font-medium">Livraison</span>
+                            <span class="text-primary font-bold">Gratuit</span>
                         </div>
                         <div class="flex justify-between items-center mb-4">
                             <span class="text-surface-900 dark:text-surface-0 font-bold">Total</span>
-                            <span class="text-surface-900 dark:text-surface-0 font-medium text-xl">$123.00</span>
+                            <span class="text-surface-900 dark:text-surface-0 font-medium text-xl">123.00 MAD</span>
                         </div>
                     </div>
                     <hr class="border-t border-gray-300 dark:border-gray-700 my-2" />
                     <div class="py-2 mt-4 flex items-center justify-between rounded">
-                        <span class="text-surface-900 dark:text-surface-0 font-bold">Upfront payment</span>
-                        <span class="text-surface-900 dark:text-surface-0 font-medium text-xl">$ {{amount - borrowAmount}}</span>
+                        <span class="text-surface-900 dark:text-surface-0 font-bold">Apport personnel</span>
+                        <span class="text-surface-900 dark:text-surface-0 font-medium text-xl">{{ amount - borrowAmount }} MAD</span>
                     </div>
                     <div class="py-2 mt-4 flex items-center justify-between rounded">
-                        <span class="text-surface-900 dark:text-surface-0 font-bold">Montly payment</span>
-                        <span class="text-surface-900 dark:text-surface-0 font-medium text-xl">$ {{calculateLoan(borrowAmount, interest, months)}}</span>
+                        <span class="text-surface-900 dark:text-surface-0 font-bold">Mensualité Mourabaha</span>
+                        <span class="text-surface-900 dark:text-surface-0 font-medium text-xl">{{ calculateLoan(borrowAmount, interest, months) }} MAD</span>
                     </div>
                 </div>
             </div>
         </div>
     `
 })
-export class CheckoutForm {
+export class CheckoutForm implements OnInit {
+
+    items: MenuItem[] = [];
+    currentStep: number = 1;
+
     quantities: number[] = [1, 1, 1];
-
     value: string = '';
-
     checked: boolean = true;
-
     checked2: boolean = true;
-
     amount: number = 123;
     borrowAmount: number = this.amount / 2;
     interest: number = 5;
@@ -163,11 +174,40 @@ export class CheckoutForm {
         { name: 'Turkey / Istanbul', code: 'IST' },
         { name: 'France / Paris', code: 'PRS' }
     ];
-
     selectedCity: string = '';
 
+    constructor(private messageService: MessageService) {}
+
+    ngOnInit() {
+        this.items = [
+            {
+                label: 'Information',
+                icon: 'pi pi-user'
+            },
+            {
+                label: 'Documents',
+                icon: 'pi pi-cloud-upload'
+            }
+        ];
+    }
+
+    nextStep() {
+        this.currentStep = 2;
+    }
+
+    previousStep() {
+        this.currentStep = 1;
+    }
+
+    onUpload(event: any) {
+        this.messageService.add({ severity: 'info', summary: 'Success', detail: 'Files Uploaded Successfully' });
+    }
+
     calculateLoan(borrowAmount: number, interest: number, months: number) {
-        const monthlyRate = (interest / 100) / 12;
+        if (borrowAmount <= 0 || months <= 0) {
+            return '0.00';
+        }
+        const monthlyRate = interest / 100 / 12;
         const monthlyPayment = (borrowAmount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
         return monthlyPayment.toFixed(2);
     }
@@ -176,10 +216,9 @@ export class CheckoutForm {
         const input = event.target as HTMLInputElement;
         let value = parseInt(input.value);
         if (value < 1 || isNaN(value)) {
-            input.value = "1";
+            input.value = '1';
             this.months = 1;
-        }
-        else {
+        } else {
             this.months = value;
         }
     }
