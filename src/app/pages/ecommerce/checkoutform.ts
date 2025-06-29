@@ -12,6 +12,7 @@ import { RippleModule } from 'primeng/ripple';
 import { SelectModule } from 'primeng/select';
 import { ToastModule } from 'primeng/toast';
 import { StepsModule } from 'primeng/steps';
+import { UploaderComponent } from '../files/uploader/uploader';
 
 @Component({
     selector: 'app-checkout-form',
@@ -28,7 +29,8 @@ import { StepsModule } from 'primeng/steps';
         FileUploadModule,
         ToastModule,
         StepsModule,
-        CommonModule
+        CommonModule,
+        UploaderComponent
     ],
     providers: [MessageService],
     template: `
@@ -75,27 +77,17 @@ import { StepsModule } from 'primeng/steps';
                             <div class="col-span-12 flex justify-center">
                                 <div class="bg-white rounded shadow p-6 max-w-md w-full">
                                     <span class="text-surface-900 dark:text-surface-0 text-2xl block font-medium mb-4">Téléversement des pièces</span>
-                                    <p class="text-surface-600 dark:text-surface-200 mb-8">Veuillez téléverser les documents requis pour compléter votre demande.</p>
-                                    <div class="flex flex-col gap-6">
-                                        <!-- Pièce d'identité -->
-                                        <div class="border rounded p-4 flex flex-col items-center">
-                                            <label class="font-semibold mb-2">Pièce d'identité</label>
-                                            <input type="file" (change)="onFileChange($event, 'idDoc')" accept=".pdf,.jpg,.png" />
-                                            
-                                        </div>
-                                        <!-- Fiche de paie -->
-                                        <div class="border rounded p-4 flex flex-col items-center">
-                                            <label class="font-semibold mb-2">Fiche de paie</label>
-                                            <input type="file" (change)="onFileChange($event, 'payslip')" accept=".pdf,.jpg,.png" />
-                                            
-                                        </div>
-                                        <!-- Relevé bancaire -->
-                                        <div class="border rounded p-4 flex flex-col items-center">
-                                            <label class="font-semibold mb-2">Relevé bancaire</label>
-                                            <input type="file" (change)="onFileChange($event, 'bankStatement')" accept=".pdf,.jpg,.png" />
-                                            
-                                        </div>
-                                    </div>
+                                    <p class="text-surface-600 dark:text-surface-200 mb-8">
+                                        Veuillez téléverser les documents requis pour compléter votre demande :
+                                        <strong>Pièce d'identité</strong>, <strong>fiche de paie</strong>, <strong>relevé bancaire</strong>
+                                    </p>
+                                    <app-file-uploader (filesChanged)="onFilesChanged($event)"></app-file-uploader>
+                                    <ul *ngIf="uploadedFiles.length > 0" class="mt-4">
+                                        <li *ngFor="let file of uploadedFiles">
+                                            <span>{{ file.name }}</span>
+                                            <span class="ml-2 text-xs text-gray-500">({{ file.type }})</span>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                             <div class="col-span-12 flex flex-col lg:flex-row justify-between items-center my-12">
@@ -181,12 +173,7 @@ export class CheckoutForm implements OnInit {
     ];
     selectedCity: string = '';
 
-    idDocName: string = '';
-    payslipName: string = '';
-    bankStatementName: string = '';
-    idDocFile: File | null = null;
-    payslipFile: File | null = null;
-    bankStatementFile: File | null = null;
+    uploadedFiles: any[] = [];
 
     constructor(private messageService: MessageService) { }
 
@@ -211,24 +198,12 @@ export class CheckoutForm implements OnInit {
         this.currentStep = 1;
     }
 
-    onFileChange(event: any, type: 'idDoc' | 'payslip' | 'bankStatement') {
-        const file = event.target.files[0];
-        if (file) {
-            if (type === 'idDoc') {
-                this.idDocFile = file;
-                this.idDocName = file.name;
-            } else if (type === 'payslip') {
-                this.payslipFile = file;
-                this.payslipName = file.name;
-            } else if (type === 'bankStatement') {
-                this.bankStatementFile = file;
-                this.bankStatementName = file.name;
-            }
-        }
+    onFilesChanged(files: any[]) {
+        this.uploadedFiles = files;
     }
 
     allDocumentsUploaded(): boolean {
-        return !!(this.idDocFile && this.payslipFile && this.bankStatementFile);
+        return this.uploadedFiles.length >= 3;
     }
 
     calculateLoan(borrowAmount: number, interest: number, months: number) {
