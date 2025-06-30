@@ -42,7 +42,7 @@ import { UploaderComponent } from '../files/uploader/uploader';
                     <span class="text-surface-900 dark:text-surface-0 block font-bold text-xl">Checkout</span>
                 </div>
                 <div class="col-span-12 lg:col-span-6 h-full px-6 py-6 md:px-12">
-                    
+
                 <p-steps [model]="items" [activeIndex]="currentStep - 1" [readonly]="true" class="mb-12"></p-steps>
 
                     <div *ngIf="currentStep === 1">
@@ -74,30 +74,59 @@ import { UploaderComponent } from '../files/uploader/uploader';
 
                     <div *ngIf="currentStep === 2">
                         <div class="grid grid-cols-12 gap-4 mt-10">
-                            <div class="col-span-12 flex justify-center">
-                                <div class="bg-white rounded shadow p-6 max-w-md w-full">
-                                    <span class="text-surface-900 dark:text-surface-0 text-2xl block font-medium mb-4">Téléversement des pièces</span>
-                                    <p class="text-surface-600 dark:text-surface-200 mb-8">
-                                        Veuillez téléverser les documents requis pour compléter votre demande :
+                            <div class="col-span-12">
+                                <div class="bg-white rounded shadow p-6">
+                                    <h2 class="text-surface-900 dark:text-surface-0 text-2xl block font-medium mb-4">
+                                        Téléversement des pièces justificatives
+                                    </h2>
+                                    <p class="text-surface-600 dark:text-surface-200 mb-6">
+                                        Veuillez téléverser les documents requis pour compléter votre demande de financement
                                         <strong>Pièce d'identité</strong>, <strong>fiche de paie</strong>, <strong>relevé bancaire</strong>
                                     </p>
-                                    <app-file-uploader (filesChanged)="onFilesChanged($event)"></app-file-uploader>
-                                    <ul *ngIf="uploadedFiles.length > 0" class="mt-4">
-                                        <li *ngFor="let file of uploadedFiles">
-                                            <span>{{ file.name }}</span>
-                                            <span class="ml-2 text-xs text-gray-500">({{ file.type }})</span>
-                                        </li>
-                                    </ul>
+
+                                    <app-file-uploader
+                                        (filesChanged)="onFilesChanged($event)"
+                                        [showRequiredDocuments]="true">
+                                    </app-file-uploader>
                                 </div>
                             </div>
-                            <div class="col-span-12 flex flex-col lg:flex-row justify-between items-center my-12">
-                                <button pButton pRipple (click)="previousStep()" label="Précedent" icon="pi pi-fw pi-arrow-left" severity="secondary" class="w-full lg:w-auto"></button>
-                                <button pButton pRipple label="Finaliser la demande de financement" icon="pi pi-fw pi-check" class="w-full lg:w-auto mt-4 lg:mt-0" [disabled]="!allDocumentsUploaded()"></button>
+
+                            <div class="col-span-12 flex flex-col lg:flex-row justify-between items-center my-8">
+                                <button pButton
+                                        pRipple
+                                        (click)="previousStep()"
+                                        label="Précédent"
+                                        icon="pi pi-fw pi-arrow-left"
+                                        severity="secondary"
+                                        class="w-full lg:w-auto">
+                                </button>
+
+                                <button pButton
+                                        pRipple
+                                        label="Finaliser la demande de financement"
+                                        icon="pi pi-fw pi-check"
+                                        class="w-full lg:w-auto mt-4 lg:mt-0"
+                                        [disabled]="!allDocumentsUploaded()"
+                                        [class.p-button-success]="allDocumentsUploaded()">
+                                </button>
+                            </div>
+
+                            <div class="col-span-12" *ngIf="!allDocumentsUploaded()">
+                                <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                                    <div class="flex items-center gap-2">
+                                        <i class="pi pi-info-circle text-blue-600"></i>
+                                        <span class="text-blue-800 font-medium">Information</span>
+                                    </div>
+                                    <p class="text-blue-700 text-sm mt-2">
+                                        Assurez-vous que tous vos documents sont lisibles et récents.
+                                        Les pièces d'identité doivent être en cours de validité.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
                 <div class="col-span-12 lg:col-span-6 px-6 py-6 md:px-12">
                     <div class="pb-4 border-surface-200 dark:border-surface-700">
                         <span class="text-surface-900 dark:text-surface-0 font-medium text-xl">Votre panier</span>
@@ -203,7 +232,10 @@ export class CheckoutForm implements OnInit {
     }
 
     allDocumentsUploaded(): boolean {
-        return this.uploadedFiles.length >= 3;
+        const requiredDocTypes = ['identity', 'payslip', 'bank_statement'];
+        return requiredDocTypes.every(type =>
+            this.uploadedFiles.some((file: any) => file.documentType === type)
+        );
     }
 
     calculateLoan(borrowAmount: number, interest: number, months: number) {
