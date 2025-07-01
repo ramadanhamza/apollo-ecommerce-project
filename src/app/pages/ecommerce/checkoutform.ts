@@ -13,6 +13,7 @@ import { SelectModule } from 'primeng/select';
 import { ToastModule } from 'primeng/toast';
 import { StepsModule } from 'primeng/steps';
 import { UploaderComponent } from '../files/uploader/uploader';
+import { FinancementService } from '../service/financement.service';
 
 @Component({
     selector: 'app-checkout-form',
@@ -106,7 +107,8 @@ import { UploaderComponent } from '../files/uploader/uploader';
                                         label="Finaliser la demande de financement"
                                         icon="pi pi-fw pi-check"
                                         class="w-full lg:w-auto mt-4 lg:mt-0"
-                                        [disabled]="!allDocumentsUploaded()"
+                                        (click)="demarrerProcess()"
+
                                         [class.p-button-success]="allDocumentsUploaded()">
                                 </button>
                             </div>
@@ -136,7 +138,7 @@ import { UploaderComponent } from '../files/uploader/uploader';
                         <div class="flex-auto lg:ml-4">
                             <div class="flex items-center justify-between mb-4">
                                 <span class="text-surface-900 dark:text-surface-0 font-bold">Nom du produit</span>
-                                <span class="text-surface-900 dark:text-surface-0 font-bold">123.00 MAD</span>
+                                <span class="text-surface-900 dark:text-surface-0 font-bold"> {{amount}} MAD</span>
                             </div>
                             <div class="text-surface-600 dark:text-surface-200 text-sm mb-4">Black | Large</div>
                             <div class="flex flex-auto justify-between items-center">
@@ -154,7 +156,7 @@ import { UploaderComponent } from '../files/uploader/uploader';
                     <div class="py-2 mt-4">
                         <div class="flex justify-between items-center mb-4">
                             <span class="text-surface-900 dark:text-surface-0 font-medium">Sous-total</span>
-                            <span class="text-surface-900 dark:text-surface-0">123.00 MAD</span>
+                            <span class="text-surface-900 dark:text-surface-0">{{amount}} MAD</span>
                         </div>
                         <div class="flex justify-between items-center mb-4">
                             <span class="text-surface-900 dark:text-surface-0 font-medium">Livraison</span>
@@ -162,7 +164,7 @@ import { UploaderComponent } from '../files/uploader/uploader';
                         </div>
                         <div class="flex justify-between items-center mb-4">
                             <span class="text-surface-900 dark:text-surface-0 font-bold">Total</span>
-                            <span class="text-surface-900 dark:text-surface-0 font-medium text-xl">123.00 MAD</span>
+                            <span class="text-surface-900 dark:text-surface-0 font-medium text-xl">{{amount}} MAD</span>
                         </div>
                     </div>
                     <hr class="border-t border-gray-300 dark:border-gray-700 my-2" />
@@ -183,12 +185,12 @@ export class CheckoutForm implements OnInit {
 
     items: MenuItem[] = [];
     currentStep: number = 1;
-
+    
     quantities: number[] = [1, 1, 1];
     value: string = '';
     checked: boolean = true;
     checked2: boolean = true;
-    amount: number = 123;
+    amount: number = 15000;
     borrowAmount: number = this.amount / 2;
     interest: number = 5;
     months: number = 12;
@@ -204,7 +206,7 @@ export class CheckoutForm implements OnInit {
 
     uploadedFiles: any[] = [];
 
-    constructor(private messageService: MessageService) { }
+    constructor(private financementService: FinancementService, private messageService: MessageService) { }
 
     ngOnInit() {
         this.items = [
@@ -240,11 +242,11 @@ export class CheckoutForm implements OnInit {
 
     calculateLoan(borrowAmount: number, interest: number, months: number) {
         if (borrowAmount <= 0 || months <= 0) {
-            return '0.00';
+            return 0;
         }
         const monthlyRate = interest / 100 / 12;
         const monthlyPayment = (borrowAmount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
-        return monthlyPayment.toFixed(2);
+        return Number(monthlyPayment.toFixed(2));
     }
 
     validateDuration(event: Event) {
@@ -256,5 +258,18 @@ export class CheckoutForm implements OnInit {
         } else {
             this.months = value;
         }
+    }
+
+    demarrerProcess() {
+        const demandeRequest = { interest: this.interest, borrowAmount: this.borrowAmount, monthlyPayment: this.calculateLoan(this.borrowAmount, this.interest, this.months), upfrontPayment: this.amount-this.borrowAmount, months: this.months };
+        this.financementService.demarrerDemandeFinancement(demandeRequest).subscribe(() => {
+            this.messageService.add({
+                severity: 'success',
+                summary: 'Succès',
+                detail: 'La demande de financement a été envoyée avec succès',
+            });
+        }, error => {
+            console.log("Error : ", error);
+        });
     }
 }
