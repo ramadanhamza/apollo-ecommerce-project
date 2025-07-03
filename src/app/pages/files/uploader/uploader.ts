@@ -1,30 +1,31 @@
 import { CommonModule } from '@angular/common';
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { FileUploadModule } from 'primeng/fileupload';
-import { ToastModule } from 'primeng/toast';
-import { ButtonDirective } from 'primeng/button';
-import { Ripple } from 'primeng/ripple';
 import { BadgeModule } from 'primeng/badge';
+import { ButtonDirective } from 'primeng/button';
+import { FileUpload, FileUploadModule } from 'primeng/fileupload';
+import { Ripple } from 'primeng/ripple';
 import { TagModule } from 'primeng/tag';
+import { ToastModule } from 'primeng/toast';
 
 interface UploadedFile {
     name: string;
     objectURL: string;
     size: number;
     type: string;
-    documentType?: string;
-    documentLabel?: string;
+    documentType: string;
+    documentLabel: string;
     uploadDate: Date;
     status: 'completed' | 'processing' | 'error';
+    file: File
 }
 
 interface RequiredDocument {
     type: string;
     label: string;
     required: boolean;
-    maxSize: number; // en MB
-    acceptedFormats: string[];
+    maxSizeMB: number;
+    acceptedFormats: string;
 }
 
 @Component({
@@ -33,248 +34,189 @@ interface RequiredDocument {
     imports: [ToastModule, FileUploadModule, CommonModule, ButtonDirective, Ripple, BadgeModule, TagModule],
     template: `
         <p-toast key="fu"></p-toast>
-        <div>
-            <!-- Zone d'upload -->
-            <p-fileupload
-                #fileUploader
-                name="demo[]"
-                [customUpload]="true"
-                [multiple]="true"
-                (onSelect)="onUpload($event)"
-                [showUploadButton]="false"
-                [showCancelButton]="false"
-                [auto]="true"
-                [accept]="acceptedFileTypes"
-                class="upload-button-hidden w-full"
-            >
-                <ng-template #content>
-                    <div class="w-full py-6"
-                         style="cursor: pointer"
-                         (click)="fileUploader.advancedFileInput.nativeElement.click()"
-                         [class]="uploadedFiles.length ? 'border-2 border-dashed border-surface-300 rounded-lg p-4 text-center hover:border-primary-400 hover:bg-primary-50 transition-colors' : 'border-2 border-dashed border-surface-300 rounded-lg p-8 text-center hover:border-primary-400 hover:bg-primary-50 transition-colors'">
 
-                        <div *ngIf="!uploadedFiles.length" class="flex flex-col justify-center items-center">
-                            <i class="pi pi-cloud-upload text-surface-400 text-6xl mb-4"></i>
-                            <h3 class="text-lg font-medium text-surface-900 dark:text-surface-0 mb-2">
-                                Glissez vos fichiers ici ou cliquez pour sélectionner
-                            </h3>
-                            <p class="text-surface-600 dark:text-surface-200 text-sm mb-4">
-                                Formats acceptés: {{ acceptedFileTypes }} (max 10MB par fichier)
-                            </p>
-                            <button pButton
-                                    label="Sélectionner des fichiers"
-                                    icon="pi pi-upload"
-                                    class="p-button-outlined"
-                                    type="button"></button>
+        <div class="space-y-4">
+            <h3 class="text-lg font-semibold text-surface-900 dark:text-surface-0 mb-2">
+                Documents Requis
+            </h3>
+
+            <div *ngFor="let doc of requiredDocuments" class="document-slot">
+
+                <div *ngIf="!uploadedFiles[doc.type]">
+                    <p-fileupload
+                        #fileUploader
+                        [name]="doc.type"
+                        [customUpload]="true"
+                        [multiple]="false"
+                        (onSelect)="onUpload($event, doc)"
+                        [showUploadButton]="false"
+                        [showCancelButton]="false"
+                        [auto]="true"
+                        [accept]="doc.acceptedFormats"
+                        [maxFileSize]="doc.maxSizeMB * 1024 * 1024"
+                    >
+                        <ng-template #content>
+                            <div class="flex items-center gap-4 p-4 border-2 border-dashed border-surface-300 rounded-lg hover:border-primary-400 hover:bg-primary-50 transition-colors"
+                                 style="cursor: pointer"
+                                 (click)="fileUploader.advancedFileInput.nativeElement.click()">
+                                <i class="pi pi-upload text-surface-400 text-3xl"></i>
+                                <div>
+                                    <h4 class="font-medium text-surface-800 dark:text-surface-100">{{ doc.label }}</h4>
+                                    <p class="text-sm text-surface-600 dark:text-surface-300">
+                                        Format: {{ doc.acceptedFormats }} (Max {{ doc.maxSizeMB }}MB)
+                                    </p>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </p-fileupload>
+                </div>
+
+                <div *ngIf="uploadedFiles[doc.type] as file"
+                     class="relative flex items-center justify-between p-4 border border-surface-200 dark:border-surface-700 rounded-lg bg-surface-50 dark:bg-surface-800">
+                    <div class="flex items-center gap-4 flex-1 min-w-0">
+                         <div class="flex-shrink-0">
+                            <i *ngIf="file.type && file.type.startsWith('image/'); else fileIcon"
+                               class="pi pi-image text-3xl text-green-600"></i>
+                            <ng-template #fileIcon>
+                                <i class="pi pi-file-pdf text-3xl text-red-600"></i>
+                            </ng-template>
                         </div>
-
-                        <div *ngIf="uploadedFiles.length" class="text-center">
-                            <i class="pi pi-plus text-surface-400 text-2xl mb-2"></i>
-                            <p class="text-surface-600 dark:text-surface-200 text-sm">
-                                Cliquez pour ajouter d'autres fichiers
-                            </p>
+                        <div class="flex-1 min-w-0">
+                            <p-tag [value]="file.documentLabel" [severity]="getTagSeverity(file.documentType)" class="mb-2"></p-tag>
+                            <div class="font-medium text-surface-900 dark:text-surface-0 truncate" [title]="file.name">
+                                {{ file.name }}
+                            </div>
+                            <div class="text-sm text-surface-600 dark:text-surface-200 mt-1">
+                                {{ formatFileSize(file.size) }} •
+                                <i class="pi pi-check-circle text-green-600"></i> Complété
+                            </div>
                         </div>
                     </div>
-                </ng-template>
-            </p-fileupload>
-
-            <!-- Liste des fichiers uploadés -->
-            <div *ngIf="uploadedFiles.length" class="mt-6">
-                <h3 class="text-lg font-semibold text-surface-900 dark:text-surface-0 mb-4">
-                    Documents téléversés ({{ uploadedFiles.length }})
-                </h3>
-                <div class="space-y-3">
-                    <div *ngFor="let file of uploadedFiles; let i = index"
-                         class="flex items-center justify-between p-4 border border-surface-200 dark:border-surface-700 rounded-lg bg-surface-50 dark:bg-surface-800">
-
-                        <div class="flex items-center gap-4">
-                            <!-- Icône du fichier -->
-                            <div class="flex-shrink-0">
-                                <i *ngIf="file.type && file.type.startsWith('image/'); else fileIcon"
-                                   class="pi pi-image text-3xl text-green-600"></i>
-                                <ng-template #fileIcon>
-                                    <i class="pi pi-file-pdf text-3xl text-red-600"></i>
-                                </ng-template>
-                            </div>
-
-                            <!-- Informations du fichier -->
-                            <div class="flex-1">
-                                <div class="font-medium text-surface-900 dark:text-surface-0">
-                                    {{ file.name }}
-                                </div>
-                                <div class="text-sm text-surface-600 dark:text-surface-200 mt-1">
-                                    <span *ngIf="file.documentLabel" class="inline-block">
-                                        <p-tag [value]="file.documentLabel"
-                                               [severity]="getTagSeverity(file.documentType!)"
-                                               class="mr-2"></p-tag>
-                                    </span>
-                                    {{ formatFileSize(file.size) }} •
-                                    {{ file.uploadDate | date:'dd/MM/yyyy HH:mm' }}
-                                </div>
-                            </div>
-
-                            <!-- Statut -->
-                            <div class="flex items-center gap-2">
-                                <i *ngIf="file.status === 'completed'"
-                                   class="pi pi-check-circle text-green-600 text-xl"></i>
-                                <i *ngIf="file.status === 'processing'"
-                                   class="pi pi-spin pi-spinner text-blue-600 text-xl"></i>
-                                <i *ngIf="file.status === 'error'"
-                                   class="pi pi-exclamation-triangle text-red-600 text-xl"></i>
-                            </div>
-                        </div>
-
-                        <!-- Actions -->
-                        <div class="flex items-center gap-2 ml-4">
-                            <!-- Bouton preview -->
-                            <button pButton
-                                    pRipple
-                                    icon="pi pi-eye"
-                                    class="p-button-rounded p-button-text p-button-sm"
-                                    (click)="previewFile(file)"
-                                    type="button"
-                                    title="Prévisualiser"></button>
-
-                            <!-- Bouton supprimer -->
-                            <button pButton
-                                    pRipple
-                                    icon="pi pi-trash"
-                                    class="p-button-rounded p-button-text p-button-sm p-button-danger"
-                                    (click)="removeFile(file)"
-                                    type="button"
-                                    title="Supprimer"></button>
-                        </div>
+                    <div class="flex items-center gap-2 ml-4">
+                        <button pButton pRipple icon="pi pi-eye" class="p-button-rounded p-button-text" (click)="previewFile(file)" type="button" title="Prévisualiser"></button>
+                        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger" (click)="removeFile(doc.type)" type="button" title="Supprimer"></button>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Statut global -->
-            <div *ngIf="uploadedFiles.length" class="mt-6">
-                <div *ngIf="allRequiredDocumentsUploaded(); else missingDocs"
-                     class="flex items-center gap-3 p-4 bg-green-50 border border-green-200 rounded-lg">
-                    <i class="pi pi-check-circle text-green-600 text-2xl"></i>
+        <div *ngIf="getUploadedFilesArray().length > 0" class="mt-6">
+            <div *ngIf="allRequiredDocumentsUploaded(); else missingDocs"
+                 class="flex items-center gap-3 p-4 bg-green-50 border border-green-200 rounded-lg">
+                <i class="pi pi-check-circle text-green-600 text-2xl"></i>
+                <div>
+                    <div class="font-semibold text-green-800">Tous les documents requis ont été téléversés</div>
+                    <div class="text-sm text-green-700">Votre dossier est prêt pour la validation.</div>
+                </div>
+            </div>
+            <ng-template #missingDocs>
+                <div class="flex items-center gap-3 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                    <i class="pi pi-exclamation-triangle text-yellow-600 text-2xl"></i>
                     <div>
-                        <div class="font-semibold text-green-800">Tous les documents requis ont été téléversés</div>
-                        <div class="text-sm text-green-700">Votre dossier est prêt pour la validation</div>
-                    </div>
-                </div>
-                <ng-template #missingDocs>
-                    <div class="flex items-center gap-3 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-                        <i class="pi pi-exclamation-triangle text-yellow-600 text-2xl"></i>
-                        <div>
-                            <div class="font-semibold text-yellow-800">Documents manquants</div>
-                            <div class="text-sm text-yellow-700">
-                                Veuillez téléverser tous les documents requis pour continuer
-                            </div>
+                        <div class="font-semibold text-yellow-800">Documents manquants</div>
+                        <div class="text-sm text-yellow-700">
+                            Veuillez téléverser tous les documents requis pour continuer.
                         </div>
                     </div>
-                </ng-template>
-            </div>
+                </div>
+            </ng-template>
         </div>
     `,
     providers: [MessageService],
     styles: [`
-        :host ::ng-deep .p-fileupload-header {
+        :host ::ng-deep .p-fileupload-header,
+        :host ::ng-deep .p-fileupload-files {
             display: none;
         }
-        :host ::ng-deep .p-fileupload {
+        :host ::ng-deep .p-fileupload-content {
+            padding: 0;
             border: none;
         }
-        :host ::ng-deep .p-fileupload-file-list {
-            display: none;
-        }
-        .space-y-3 > * + * {
-            margin-top: 0.75rem;
+        .space-y-4 > * + * {
+            margin-top: 1rem;
         }
     `]
 })
 export class UploaderComponent {
     @Output() filesChanged = new EventEmitter<UploadedFile[]>();
-    @Input() showRequiredDocuments = true;
-    @Input() acceptedFileTypes = 'image/*,.pdf';
-
-    uploadedFiles: UploadedFile[] = [];
+    @Input() acceptedFileTypes = '.pdf,image/*';
 
     requiredDocuments: RequiredDocument[] = [
-        {
-            type: 'identity',
-            label: 'Pièce d\'identité',
-            required: true,
-            maxSize: 5,
-            acceptedFormats: ['PDF', 'JPG', 'PNG']
-        },
-        {
-            type: 'payslip',
-            label: 'Fiche de paie',
-            required: true,
-            maxSize: 5,
-            acceptedFormats: ['PDF']
-        },
-        {
-            type: 'bank_statement',
-            label: 'Relevé bancaire',
-            required: true,
-            maxSize: 5,
-            acceptedFormats: ['PDF']
-        }
+        { type: 'identity', label: 'Pièce d\'identité (CIN)', required: true, maxSizeMB: 5, acceptedFormats: '.pdf,image/*' },
+        { type: 'payslip', label: 'Dernière Fiche de paie', required: true, maxSizeMB: 5, acceptedFormats: '.pdf' },
+        { type: 'bank_statement', label: 'Relevé d\'identité bancaire (RIB)', required: true, maxSizeMB: 5, acceptedFormats: '.pdf' }
     ];
+
+    uploadedFiles: { [key: string]: UploadedFile | null } = {
+        identity: null,
+        payslip: null,
+        bank_statement: null
+    };
 
     constructor(private messageService: MessageService) { }
 
-    onUpload(event: any) {
-        if (event && event.files) {
-            for (let file of event.files) {
-                const uploadedFile: UploadedFile = {
-                    name: file.name,
-                    objectURL: URL.createObjectURL(file),
-                    size: file.size,
-                    type: file.type,
-                    uploadDate: new Date(),
-                    status: 'completed',
-                    ...this.categorizeDocument(file.name)
-                };
-                this.uploadedFiles.push(uploadedFile);
+    onUpload(event: any, doc: RequiredDocument) {
+        if (event && event.files && event.files.length > 0) {
+            const file = event.files[0];
+
+            const newFile: UploadedFile = {
+                name: file.name,
+                objectURL: URL.createObjectURL(file),
+                size: file.size,
+                type: file.type,
+                uploadDate: new Date(),
+                status: 'completed',
+                documentType: doc.type,
+                documentLabel: doc.label,
+                file: file
+            };
+
+            if(this.uploadedFiles[doc.type]) {
+                URL.revokeObjectURL(this.uploadedFiles[doc.type]!.objectURL);
             }
-            this.filesChanged.emit(this.uploadedFiles);
+
+            this.uploadedFiles[doc.type] = newFile;
+
+            this.emitFiles();
             this.messageService.add({
+                key: 'fu',
                 severity: 'success',
                 summary: 'Succès',
-                detail: `${event.files.length} fichier(s) téléversé(s) avec succès`
+                detail: `Document '${doc.label}' téléversé.`
             });
         }
     }
 
-    removeFile(file: UploadedFile) {
-        this.uploadedFiles = this.uploadedFiles.filter(f => f !== file);
-        this.filesChanged.emit(this.uploadedFiles);
-        URL.revokeObjectURL(file.objectURL);
+    removeFile(docType: string) {
+        const fileToRemove = this.uploadedFiles[docType];
+        if (fileToRemove) {
+            URL.revokeObjectURL(fileToRemove.objectURL);
+            this.uploadedFiles[docType] = null;
+            this.emitFiles();
 
-        this.messageService.add({
-            severity: 'info',
-            summary: 'Supprimé',
-            detail: 'Fichier supprimé'
-        });
+            this.messageService.add({
+                key: 'fu',
+                severity: 'info',
+                summary: 'Supprimé',
+                detail: `Document '${fileToRemove.documentLabel}' supprimé.`
+            });
+        }
     }
 
     previewFile(file: UploadedFile) {
-        // Ouvrir le fichier dans un nouvel onglet
         window.open(file.objectURL, '_blank');
     }
 
-    categorizeDocument(fileName: string): { documentType?: string; documentLabel?: string } {
-        const lowerName = fileName.toLowerCase();
+    allRequiredDocumentsUploaded(): boolean {
+        return this.requiredDocuments.every(doc => !doc.required || !!this.uploadedFiles[doc.type]);
+    }
 
-        if (lowerName.includes('cin') || lowerName.includes('carte') || lowerName.includes('identit')) {
-            return { documentType: 'identity', documentLabel: 'Pièce d\'identité' };
-        }
-        if (lowerName.includes('paie') || lowerName.includes('salaire')) {
-            return { documentType: 'payslip', documentLabel: 'Fiche de paie' };
-        }
-        if (lowerName.includes('relev') || lowerName.includes('bancaire') || lowerName.includes('compte')) {
-            return { documentType: 'bank_statement', documentLabel: 'Relevé bancaire' };
-        }
+    private emitFiles() {
+        this.filesChanged.emit(this.getUploadedFilesArray());
+    }
 
-        return {};
+    getUploadedFilesArray(): UploadedFile[] {
+        return Object.values(this.uploadedFiles).filter(f => f !== null) as UploadedFile[];
     }
 
     formatFileSize(bytes: number): string {
@@ -285,15 +227,6 @@ export class UploaderComponent {
         return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
     }
 
-    getDocumentIcon(type: string): string {
-        switch (type) {
-            case 'identity': return 'pi pi-id-card text-blue-600';
-            case 'payslip': return 'pi pi-wallet text-green-600';
-            case 'bank_statement': return 'pi pi-building text-purple-600';
-            default: return 'pi pi-file text-gray-600';
-        }
-    }
-
     getTagSeverity(type: string): 'success' | 'info' | 'warn' | 'danger' {
         switch (type) {
             case 'identity': return 'info';
@@ -301,15 +234,5 @@ export class UploaderComponent {
             case 'bank_statement': return 'warn';
             default: return 'info';
         }
-    }
-
-    isDocumentTypeUploaded(type: string): boolean {
-        return this.uploadedFiles.some(file => file.documentType === type);
-    }
-
-    allRequiredDocumentsUploaded(): boolean {
-        return this.requiredDocuments
-            .filter(doc => doc.required)
-            .every(doc => this.isDocumentTypeUploaded(doc.type));
     }
 }

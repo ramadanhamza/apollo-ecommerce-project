@@ -7,18 +7,21 @@ export default [
         redirectTo: 'liste-produits'
     },
     {
-        path: 'apercu-produit',
+        path: 'apercu-produit/:id',
         data: { breadcrumb: 'Aperçu du produit' },
+        title: 'Aperçu du produit',
         loadComponent: () => import('./productoverview').then((c) => c.ProductOverview)
     },
     {
         path: 'liste-produits',
         data: { breadcrumb: 'Liste des produits' },
+        title: 'Liste des produits',
         loadComponent: () => import('./productlist').then((c) => c.ProductList)
     },
     {
-        path: 'mes-commandes',
-        data: { breadcrumb: 'Mes commandes' },
+        path: 'mes-dossiers',
+        data: { breadcrumb: 'Mes dossiers' },
+        title: 'Mes dossiers',
         loadComponent: () => import('./order').then((c) => c.Order)
     },
     {
@@ -34,12 +37,18 @@ export default [
     {
         path: 'paiement',
         data: { breadcrumb: 'Paiement' },
+        title: 'Paiement',
         loadComponent: () => import('./checkoutform').then((c) => c.CheckoutForm)
     },
     {
         path: 'historique-commandes',
         data: { breadcrumb: 'Historique des commandes' },
         loadComponent: () => import('./orderhistory').then((c) => c.OrderHistory)
+    },
+        {
+        path: 'promesse/:id',
+        data: { breadcrumb: 'Promesse' },
+        loadComponent: () => import('./promesse').then((c) => c.Promesse)
     },
     {
         path: 'resume-commande',

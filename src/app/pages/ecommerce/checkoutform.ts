@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MenuItem, MessageService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
 import { FileUploadModule } from 'primeng/fileupload';
@@ -14,6 +14,7 @@ import { ToastModule } from 'primeng/toast';
 import { StepsModule } from 'primeng/steps';
 import { UploaderComponent } from '../files/uploader/uploader';
 import { FinancementService } from '../service/financement.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-checkout-form',
@@ -35,241 +36,180 @@ import { FinancementService } from '../service/financement.service';
     ],
     providers: [MessageService],
     template: `
-        <p-toast></p-toast>
+<p-toast></p-toast>
 
-        <div class="card">
-            <div class="grid grid-cols-12 gap-4 grid-nogutter">
-                <div class="col-span-12 px-6 mt-6 md:mt-12 md:px-12">
-                    <span class="text-surface-900 dark:text-surface-0 block font-bold text-xl">Checkout</span>
+<div class="card">
+    <div class="grid grid-cols-12 gap-6 grid-nogutter">
+        <div class="col-span-12 lg:col-span-7 h-full sm:p-6 p-0 md:p-8">
+            
+            <div class="border border-surface-200 dark:border-surface-700 rounded-lg p-6 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-surface-900 dark:text-surface-0 text-2xl font-medium m-0">
+                        Résumé de votre demande
+                    </h2>
                 </div>
-                <div class="col-span-12 lg:col-span-6 h-full px-6 py-6 md:px-12">
-
-                <p-steps [model]="items" [activeIndex]="currentStep - 1" [readonly]="true" class="mb-12"></p-steps>
-
-                    <div *ngIf="currentStep === 1">
-                        <div class="grid grid-cols-12 gap-4 mt-10">
-                            <div class="col-span-12 mb-12">
-                                <span class="text-surface-900 dark:text-surface-0 text-2xl block font-medium mb-8">Informations du client</span>
-                                <input id="name" placeholder="Nom complet" type="text" class="p-inputtext w-full mb-6" />
-                                <input id="email" placeholder="Adresse e-mail" type="text" class="p-inputtext w-full mb-6" />
-                                <div class="flex items-center">
-                                    <p-checkbox name="checkbox-1" [(ngModel)]="checked" [binary]="true" inputId="id"></p-checkbox>
-                                    <label class="ml-2" for="checkbox-1">Recevoir des offres et actualités par e-mail</label>
-                                </div>
-                            </div>
-                            <div class="col-span-12 mb-12">
-                                <span class="text-surface-900 dark:text-surface-0 text-2xl block font-medium mb-8">	Informations sur le financement</span>
-                                <label for="interestRate" class="block text-sm font-medium text-gray-800 dark:text-white mb-2">Marge bénéficiaire (HT)</label>
-                                <input id="interestRate" type="text" class="p-inputtext w-full mb-6" [value]="interest + '%'" disabled />
-                                <label for="borrowAmount" class="block text-sm font-medium mb-1">Montant financé : <span id="borrowAmount">{{ borrowAmount }}</span></label>
-                                <input id="borrowAmount" type="range" min="1" [max]="amount" [(ngModel)]="borrowAmount" class="w-full mb-4" />
-                                <label for="months" class="block text-sm font-medium mb-1">Durée du financement : <span id="months">{{ months }}</span></label>
-                                <input id="months" type="range" min="6" max="60" [(ngModel)]="months" class="w-full mb-4" />
-                            </div>
-                            <div class="col-span-12 flex flex-col lg:flex-row justify-center items-center lg:justify-end my-12">
-                                <button pButton pRipple class="mt-4 lg:mt-0 w-full lg:w-auto order-2 lg:order-1 lg:mr-6" severity="secondary" label="Retour au panier" icon="pi pi-fw pi-arrow-left"></button>
-                                <button pButton pRipple class="w-full lg:w-auto order-1 lg:order-2" (click)="nextStep()" label="Continuer vers les documents" icon="pi pi-fw pi-arrow-right" iconPos="right"></button>
-                            </div>
-                        </div>
+                
+                <ul class="list-none p-0 m-0 space-y-3 text-surface-700 dark:text-surface-200">
+                    <li class="flex justify-between items-center">
+                        <span>Montant total:</span>
+                        <span class="font-bold text-surface-900 dark:text-surface-0">{{ checkoutData.product.price * checkoutData.quantity }} MAD</span>
+                    </li>
+                    <li class="flex justify-between items-center">
+                        <span>Apport personnel:</span>
+                        <span class="font-bold text-surface-900 dark:text-surface-0">{{ (checkoutData.product.price * checkoutData.quantity) - checkoutData.borrowAmount }} MAD</span>
+                    </li>
+                    <li class="flex justify-between items-center">
+                        <span>Montant financé:</span>
+                        <span class="font-bold text-surface-900 dark:text-surface-0">{{ checkoutData.borrowAmount }} MAD</span>
+                    </li>
+                     <li class="flex justify-between items-center">
+                        <span>Durée du financement:</span>
+                        <span class="font-bold text-surface-900 dark:text-surface-0">{{ checkoutData.months }} mois</span>
+                    </li>
+                    <li class="flex justify-between items-center">
+                        <span>Marge:</span>
+                        <span class="font-bold text-surface-900 dark:text-surface-0">{{ checkoutData.interest }} MAD</span>
+                    </li>
+                    <div class="text-primary pt-3 border-t border-surface-200 dark:border-surface-700">
+                        <p class="text-lg text-center">Votre mensualité</p>
+                        <p class="font-bold text-xl text-center">{{ calculateLoan(checkoutData.borrowAmount, checkoutData.interest, checkoutData.months) }} MAD</p>
                     </div>
+                </ul>
+            </div>
 
-                    <div *ngIf="currentStep === 2">
-                        <div class="grid grid-cols-12 gap-4 mt-10">
-                            <div class="col-span-12">
-                                <div class="bg-white rounded shadow p-6">
-                                    <h2 class="text-surface-900 dark:text-surface-0 text-2xl block font-medium mb-4">
-                                        Téléversement des pièces justificatives
-                                    </h2>
-                                    <p class="text-surface-600 dark:text-surface-200 mb-6">
-                                        Veuillez téléverser les documents requis pour compléter votre demande de financement
-                                        <strong>Pièce d'identité</strong>, <strong>fiche de paie</strong>, <strong>relevé bancaire</strong>
-                                    </p>
+            <div class="border border-surface-200 dark:border-surface-700 rounded-lg p-6">
+                <h2 class="text-surface-900 dark:text-surface-0 text-2xl font-medium mb-4">
+                    Pièces justificatives requises
+                </h2>
+                <p class="text-surface-600 dark:text-surface-200 mb-6">
+                    Veuillez téléverser les documents requis pour compléter votre demande : 
+                    <strong>Pièce d'identité</strong>, <strong>fiche de paie</strong>, et <strong>relevé bancaire</strong>.
+                </p>
 
-                                    <app-file-uploader
-                                        (filesChanged)="onFilesChanged($event)"
-                                        [showRequiredDocuments]="true">
-                                    </app-file-uploader>
-                                </div>
-                            </div>
+                <app-file-uploader
+                    (filesChanged)="onFilesChanged($event)">
+                </app-file-uploader>
+            </div>
 
-                            <div class="col-span-12 flex flex-col lg:flex-row justify-between items-center my-8">
-                                <button pButton
-                                        pRipple
-                                        (click)="previousStep()"
-                                        label="Précédent"
-                                        icon="pi pi-fw pi-arrow-left"
-                                        severity="secondary"
-                                        class="w-full lg:w-auto">
-                                </button>
-
-                                <button pButton
-                                        pRipple
-                                        label="Finaliser la demande de financement"
-                                        icon="pi pi-fw pi-check"
-                                        class="w-full lg:w-auto mt-4 lg:mt-0"
-                                        (click)="demarrerProcess()"
-
-                                        [class.p-button-success]="allDocumentsUploaded()">
-                                </button>
-                            </div>
-
-                            <div class="col-span-12" *ngIf="!allDocumentsUploaded()">
-                                <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                                    <div class="flex items-center gap-2">
-                                        <i class="pi pi-info-circle text-blue-600"></i>
-                                        <span class="text-blue-800 font-medium">Information</span>
-                                    </div>
-                                    <p class="text-blue-700 text-sm mt-2">
-                                        Assurez-vous que tous vos documents sont lisibles et récents.
-                                        Les pièces d'identité doivent être en cours de validité.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-span-12 lg:col-span-6 px-6 py-6 md:px-12">
-                    <div class="pb-4 border-surface-200 dark:border-surface-700">
-                        <span class="text-surface-900 dark:text-surface-0 font-medium text-xl">Votre panier</span>
-                    </div>
-                    <div class="flex flex-col lg:flex-row flex-wrap lg:items-center py-2 mt-4 border-surface-200 dark:border-surface-700">
-                        <img src="/demo/images/ecommerce/shop/shop-1.png" class="w-32 h-32 flex-shrink-0 mb-4" alt="product" />
-                        <div class="flex-auto lg:ml-4">
-                            <div class="flex items-center justify-between mb-4">
-                                <span class="text-surface-900 dark:text-surface-0 font-bold">Nom du produit</span>
-                                <span class="text-surface-900 dark:text-surface-0 font-bold"> {{amount}} MAD</span>
-                            </div>
-                            <div class="text-surface-600 dark:text-surface-200 text-sm mb-4">Black | Large</div>
-                            <div class="flex flex-auto justify-between items-center">
-                                <p-inputNumber [showButtons]="true" buttonLayout="horizontal" [min]="0" inputStyleClass="!w-10 text-center border-transparent outline-0 shadow-none" [(ngModel)]="quantities[0]" styleClass="border border-surface-200 dark:border-surface-700 rounded" decrementButtonClass="p-button-text text-surface-600 dark:text-surface-200 hover:text-primary py-1 px-1" incrementButtonClass="p-button-text text-surface-600 dark:text-surface-200 hover:text-primary py-1 px-1" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"></p-inputNumber>
-                                <button pButton pRipple icon="pi pi-trash" text rounded></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="py-2 mt-4 border-surface-200 dark:border-surface-700">
-                        <p-inputGroup class="mt-4">
-                            <input type="text" [(ngModel)]="value" pInputText placeholder="Promo code" class="w-full" />
-                            <button type="button" pButton pRipple label="Apply" [disabled]="!value"></button>
-                        </p-inputGroup>
-                    </div>
-                    <div class="py-2 mt-4">
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="text-surface-900 dark:text-surface-0 font-medium">Sous-total</span>
-                            <span class="text-surface-900 dark:text-surface-0">{{amount}} MAD</span>
-                        </div>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="text-surface-900 dark:text-surface-0 font-medium">Livraison</span>
-                            <span class="text-primary font-bold">Gratuit</span>
-                        </div>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="text-surface-900 dark:text-surface-0 font-bold">Total</span>
-                            <span class="text-surface-900 dark:text-surface-0 font-medium text-xl">{{amount}} MAD</span>
-                        </div>
-                    </div>
-                    <hr class="border-t border-gray-300 dark:border-gray-700 my-2" />
-                    <div class="py-2 mt-4 flex items-center justify-between rounded">
-                        <span class="text-surface-900 dark:text-surface-0 font-bold">Apport personnel</span>
-                        <span class="text-surface-900 dark:text-surface-0 font-medium text-xl">{{ amount - borrowAmount }} MAD</span>
-                    </div>
-                    <div class="py-2 mt-4 flex items-center justify-between rounded">
-                        <span class="text-surface-900 dark:text-surface-0 font-bold">Mensualité Mourabaha</span>
-                        <span class="text-surface-900 dark:text-surface-0 font-medium text-xl">{{ calculateLoan(borrowAmount, interest, months) }} MAD</span>
-                    </div>
-                </div>
+            <div class="mt-8 text-right">
+                <button pButton
+                        pRipple
+                        label="Finaliser la demande"
+                        icon="pi pi-check"
+                        iconPos="right"
+                        (click)="demarrerProcess()"
+                        [disabled]="!allDocumentsUploaded()"
+                        class="w-full lg:w-auto p-button-success">
+                </button>
             </div>
         </div>
+
+        <div class="col-span-12 lg:col-span-5 p-6 md:p-8 bg-surface-50 dark:bg-surface-800 rounded-lg lg:rounded-l-none">
+            <div class="pb-4 border-b border-surface-200 dark:border-surface-700">
+                <span class="text-surface-900 dark:text-surface-0 font-medium text-xl">Commande</span>
+            </div>
+            
+            <div class="flex items-start py-4 mt-4 gap-4">
+                <img [src]="checkoutData.product.image" class="w-24 h-24 flex-shrink-0 rounded" alt="product" />
+                <div class="flex-auto">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-surface-900 dark:text-surface-0 font-bold">{{ checkoutData.product.name }}</span>
+                    </div>
+                    <div class="text-surface-600 dark:text-surface-200 text-sm mb-1">Quantité: {{ checkoutData.quantity }}</div>
+                    <div class="text-surface-600 dark:text-surface-200 text-sm">Total: {{ checkoutData.product.price * checkoutData.quantity }} MAD</div>
+                </div>
+            </div>
+
+            <div class="py-2 mt-4 border-t border-surface-200 dark:border-surface-700">
+                <p-inputGroup class="mt-4">
+                    <input type="text" [(ngModel)]="value" pInputText placeholder="Code promo" class="w-full" />
+                    <button type="button" pButton pRipple label="Appliquer" [disabled]="!value"></button>
+                </p-inputGroup>
+            </div>
+            <div class="py-2 mt-4 flex justify-between items-center text-xl font-bold border-t border-surface-200 dark:border-surface-700 pt-4">
+                <span class="text-surface-900 dark:text-surface-0">Total</span>
+                <span class="text-surface-900 dark:text-surface-0">{{ checkoutData.product.price * checkoutData.quantity }} MAD</span>
+            </div>
+        </div>
+    </div>
+</div>
     `
 })
 export class CheckoutForm implements OnInit {
 
-    items: MenuItem[] = [];
-    currentStep: number = 1;
-    
-    quantities: number[] = [1, 1, 1];
+    checkoutData: any; 
+
     value: string = '';
     checked: boolean = true;
-    checked2: boolean = true;
-    amount: number = 15000;
-    borrowAmount: number = this.amount / 2;
-    interest: number = 5;
-    months: number = 12;
-
-    cities = [
-        { name: 'USA / New York', code: 'NY' },
-        { name: 'Italy / Rome', code: 'RM' },
-        { name: 'United Kingdoom / London', code: 'LDN' },
-        { name: 'Turkey / Istanbul', code: 'IST' },
-        { name: 'France / Paris', code: 'PRS' }
-    ];
-    selectedCity: string = '';
-
     uploadedFiles: any[] = [];
 
-    constructor(private financementService: FinancementService, private messageService: MessageService) { }
+    constructor(
+        private financementService: FinancementService,
+        private messageService: MessageService,
+        private router: Router
+    ) {
+        const navigation = this.router.getCurrentNavigation();
+        const state = navigation?.extras.state as any;
+        
+        this.checkoutData = state;
+    }
 
     ngOnInit() {
-        this.items = [
-            {
-                label: 'Information',
-                icon: 'pi pi-user'
-            },
-            {
-                label: 'Documents',
-                icon: 'pi pi-cloud-upload'
-            }
-        ];
-    }
-
-    nextStep() {
-        this.currentStep = 2;
-    }
-
-    previousStep() {
-        this.currentStep = 1;
+        if (this.checkoutData?.product) {
+            console.log(this.checkoutData);
+        } else {
+            console.error("Checkout data is missing. Redirecting home.");
+            this.router.navigate(['/']); 
+            return;
+        }
     }
 
     onFilesChanged(files: any[]) {
         this.uploadedFiles = files;
+        console.log(this.uploadedFiles);
     }
 
     allDocumentsUploaded(): boolean {
-        const requiredDocTypes = ['identity', 'payslip', 'bank_statement'];
-        return requiredDocTypes.every(type =>
-            this.uploadedFiles.some((file: any) => file.documentType === type)
-        );
+        const pdfFiles = this.uploadedFiles.filter(item => {
+            const fileObject = item.file || item;
+            return fileObject && fileObject.type === 'application/pdf' || fileObject.type === 'image/png' || fileObject.type === 'image/jpeg'
+        });
+        return pdfFiles.length === 3;
     }
-
-    calculateLoan(borrowAmount: number, interest: number, months: number) {
-        if (borrowAmount <= 0 || months <= 0) {
-            return 0;
-        }
+    
+    calculateLoan(borrowAmount: number, interest: number, months: number): number {
+        if (borrowAmount <= 0 || months <= 0) return 0;
         const monthlyRate = interest / 100 / 12;
         const monthlyPayment = (borrowAmount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
         return Number(monthlyPayment.toFixed(2));
     }
 
-    validateDuration(event: Event) {
-        const input = event.target as HTMLInputElement;
-        let value = parseInt(input.value);
-        if (value < 1 || isNaN(value)) {
-            input.value = '1';
-            this.months = 1;
-        } else {
-            this.months = value;
-        }
-    }
-
     demarrerProcess() {
-        const demandeRequest = { interest: this.interest, borrowAmount: this.borrowAmount, monthlyPayment: this.calculateLoan(this.borrowAmount, this.interest, this.months), upfrontPayment: this.amount-this.borrowAmount, months: this.months };
-        this.financementService.demarrerDemandeFinancement(demandeRequest).subscribe(() => {
+        const monthlyPayment = this.calculateLoan(this.checkoutData.borrowAmount, this.checkoutData.interest, this.checkoutData.months);
+        const upfrontPayment = (this.checkoutData.product.price * this.checkoutData.quantity) - this.checkoutData.borrowAmount;
+
+        const demandeRequest = {
+            interest: this.checkoutData.interest,
+            borrowAmount: this.checkoutData.borrowAmount,
+            monthlyPayment: monthlyPayment,
+            upfrontPayment: upfrontPayment,
+            months: this.checkoutData.months
+        };
+
+        const cinFile = this.uploadedFiles.find(f => f.documentType === 'identity')?.file;
+        const ficheDePaieFile = this.uploadedFiles.find(f => f.documentType === 'payslip')?.file;
+        const releveBancaireFile = this.uploadedFiles.find(f => f.documentType === 'bank_statement')?.file;
+
+        this.financementService.demarrerDemandeFinancement(demandeRequest, cinFile, ficheDePaieFile, releveBancaireFile).subscribe(() => {
             this.messageService.add({
-                severity: 'success',
-                summary: 'Succès',
-                detail: 'La demande de financement a été envoyée avec succès',
+                severity: 'success', summary: 'Succès', detail: 'La demande de financement a été envoyée avec succès',
             });
         }, error => {
-            console.log("Error : ", error);
+            console.error("Error : ", error);
         });
+    }
+
+    goBackToProduct() {
+        this.router.navigate(['/product-overview', this.checkoutData.product.id]);
     }
 }

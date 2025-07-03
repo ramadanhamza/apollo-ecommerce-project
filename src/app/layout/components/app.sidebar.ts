@@ -14,7 +14,8 @@ import { RouterModule } from '@angular/router';
     >
         <div class="sidebar-header">
             <a [routerLink]="['/']" class="app-logo">
-            <svg viewBox="0 0 124 22" fill="none" xmlns="http://www.w3.org/2000/svg" class="app-logo-normal">
+            <img class="w-36 rounded-xl" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScY8AFyrMNDl86IpxjBttYyNi-imgYK1B91Q&s">
+            <!-- <svg viewBox="0 0 124 22" fill="none" xmlns="http://www.w3.org/2000/svg" class="app-logo-normal">
                     <path d="M10.4851 0L0 20.9465H3.53702L10.4856 6.07843L17.2944 20.9465H20.9715L10.4851 0Z" fill="var(--logo-color)" />
                     <path d="M13.84 15.7927L16.2077 21.0016H11.7682L13.84 15.7927Z" fill="var(--logo-color)" />
                     <path d="M9.04645 21.0016L6.67875 15.7927L4.60701 21.0016H9.04645Z" fill="var(--logo-color)" />
@@ -38,7 +39,7 @@ import { RouterModule } from '@angular/router';
                     <path d="M10.4851 0L0 20.9465H3.53702L10.4856 6.07843L17.2944 20.9465H20.9715L10.4851 0Z" fill="var(--logo-color)" />
                     <path d="M13.8399 15.793L16.2076 21.0019H11.7681L13.8399 15.793Z" fill="var(--logo-color)" />
                     <path d="M9.04637 21.0019L6.67867 15.793L4.60693 21.0019H9.04637Z" fill="var(--logo-color)" />
-                </svg>
+                </svg> -->
             </a>
             <button
                 class="layout-sidebar-anchor p-link z-2"

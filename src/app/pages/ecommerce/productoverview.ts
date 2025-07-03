@@ -1,19 +1,23 @@
 import {CommonModule} from '@angular/common';
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import {ButtonModule} from 'primeng/button';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {RippleModule} from 'primeng/ripple';
 import {TabsModule} from 'primeng/tabs';
+import { ProductService } from '../service/product.service';
+import { Product } from '@/types/product';
+import {SliderModule} from 'primeng/slider';
 
 @Component({
     selector: 'app-product-overview',
-    imports: [CommonModule, FormsModule, InputNumberModule, ButtonModule, RippleModule, TabsModule],
+    imports: [CommonModule, FormsModule, InputNumberModule, ButtonModule, RippleModule, TabsModule, SliderModule],
     template: `
         <div class="card">
             <div class="grid grid-cols-12 gap-4 mb-16">
                 <div class="col-span-12 lg:col-span-7">
-                    <div class="flex">
+                    <!-- <div class="flex">
                         <div class="flex flex-col w-2/12 justify-between" style="row-gap: 1rem;">
                             <img
                                 *ngFor="let image of images; let i = index"
@@ -28,12 +32,23 @@ import {TabsModule} from 'primeng/tabs';
                         <div class="pl-4 w-10/12 flex">
                             <img src="/demo/images/ecommerce/productoverview/{{ images[selectedImageIndex] }}" class="w-full border-2 border-transparent rounded" />
                         </div>
+                    </div> -->
+                    <div class="flex">
+                        <div class="flex flex-col w-2/12 justify-between" style="row-gap: 1rem;">
+                            <img
+                                [src]="product.image"
+                                class="w-full cursor-pointer border-2 border-transparent transition-colors duration-150 border-round"
+                            />
+                        </div>
+                        <div class="pl-4 w-10/12 flex">
+                            <img [src]="product.image" class="w-full border-2 border-transparent rounded" />
+                        </div>
                     </div>
                 </div>
                 <div class="col-span-12 lg:col-span-4 py-4 lg:pl-12">
-                    <div class="flex items-center text-xl font-medium text-surface-900 dark:text-surface-0 mb-6">Product Title Placeholder</div>
+                    <div class="flex items-center text-xl font-medium text-surface-900 dark:text-surface-0 mb-6">{{product.name}}</div>
                     <div class="flex flex-wrap items-center justify-between mb-8">
-                        <span class="text-surface-900 dark:text-surface-0 font-medium text-3xl block">$120</span>
+                        <span class="text-surface-900 dark:text-surface-0 font-medium text-3xl block">{{product.price}} MAD</span>
                         <div class="flex items-center">
                             <span class="mr-4 flex-shrink-0">
                                 <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
@@ -49,83 +64,16 @@ import {TabsModule} from 'primeng/tabs';
                         </div>
                     </div>
 
-                    <div class="font-bold text-surface-900 dark:text-surface-0 mb-4">Color</div>
-                    <div class="flex items-center mb-8">
-                        <div
-                            class="w-8 h-8 flex-shrink-0 rounded-full bg-slate-500 mr-4 cursor-pointer border-2 border-surface-200 dark:border-surface-700 transition-all duration-300"
-                            [style.box-shadow]="color === 'bluegray' ? '0 0 0 0.2rem var(--p-gray-500)' : null"
-                            (click)="color = 'bluegray'"
-                        ></div>
-                        <div
-                            class="w-8 h-8 flex-shrink-0 rounded-full bg-green-500 mr-4 cursor-pointer border-2 border-surface-200 dark:border-surface-700 transition-all duration-300"
-                            [style.box-shadow]="color === 'green' ? '0 0 0 0.2rem var(--p-green-500)' : null"
-                            (click)="color = 'green'"
-                        ></div>
-                        <div
-                            class="w-8 h-8 flex-shrink-0 rounded-full bg-blue-500 cursor-pointer border-2 border-surface-200 dark:border-surface-700 transition-all duration-300"
-                            [style.box-shadow]="color === 'blue' ? '0 0 0 0.2rem var(--p-blue-500)' : null"
-                            (click)="color = 'blue'"
-                        ></div>
-                    </div>
+                    <div class="font-bold text-surface-900 dark:text-surface-0 mb-4">Description</div>
+                    <p class="leading-normal text-surface-600 dark:text-surface-200 p-0 mx-0 mt-0 mb-6">
+                        {{product.description}}
+                    </p>
 
-                    <div class="mb-4 flex items-center justify-between">
-                        <span class="font-bold text-surface-900 dark:text-surface-0">Size</span>
-                        <a tabindex="0" class="cursor-pointer text-surface-600 dark:text-surface-200 text-sm flex items-center"> Size Guide <i class="ml-1 pi pi-angle-right"></i> </a>
-                    </div>
-                    <div class="flex flex-wrap gap-4 items-center mb-8">
-                        <div
-                            class="h-12 w-[3rem] border border-surface-300 dark:border-surface-500 text-surface-900 dark:text-surface-0 inline-flex justify-center items-center flex-shrink-0 rounded mr-4 cursor-pointer hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors"
-                            [ngClass]="{
-                                '!border-primary border-2 !text-primary': size === 'XS'
-                            }"
-                            (click)="size = 'XS'"
-                        >
-                            XS
-                        </div>
-                        <div
-                            class="h-12 w-[3rem] border border-surface-300 dark:border-surface-500 text-surface-900 dark:text-surface-0 inline-flex justify-center items-center flex-shrink-0 rounded mr-4 cursor-pointer hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors"
-                            [ngClass]="{
-                                '!border-primary border-2 !text-primary': size === 'S'
-                            }"
-                            (click)="size = 'S'"
-                        >
-                            S
-                        </div>
-                        <div
-                            class="h-12 w-[3rem] border border-surface-300 dark:border-surface-500 text-surface-900 dark:text-surface-0 inline-flex justify-center items-center flex-shrink-0 rounded mr-4 cursor-pointer hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors"
-                            [ngClass]="{
-                                '!border-primary border-2 !text-primary': size === 'M'
-                            }"
-                            (click)="size = 'M'"
-                        >
-                            M
-                        </div>
-                        <div
-                            class="h-12 w-[3rem] border border-surface-300 dark:border-surface-500 text-surface-900 dark:text-surface-0 inline-flex justify-center items-center flex-shrink-0 rounded mr-4 cursor-pointer hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors"
-                            [ngClass]="{
-                                '!border-primary border-2 !text-primary': size === 'L'
-                            }"
-                            (click)="size = 'L'"
-                        >
-                            L
-                        </div>
-                        <div
-                            class="h-12 w-[3rem] border border-surface-300 dark:border-surface-500 text-surface-900 dark:text-surface-0 inline-flex justify-center items-center flex-shrink-0 rounded cursor-pointer hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors"
-                            [ngClass]="{
-                                '!border-primary border-2 !text-primary': size === 'XL'
-                            }"
-                            (click)="size = 'XL'"
-                        >
-                            XL
-                        </div>
-                    </div>
-
-                    <div class="font-bold text-surface-900 dark:text-surface-0 mb-4">Quantity</div>
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center flex-wrap gap-4">
+                    <div class="font-bold text-surface-900 dark:text-surface-0 mb-4">Quantité</div>
                         <p-inputNumber
                             [showButtons]="true"
                             buttonLayout="horizontal"
-                            [min]="0"
+                            [min]="1"
                             inputStyleClass="w-12 text-center py-2 px-1 border-transparent outline-0 shadow-none"
                             styleClass="border border-surface-200 dark:border-surface-700 rounded"
                             [(ngModel)]="quantity"
@@ -133,18 +81,91 @@ import {TabsModule} from 'primeng/tabs';
                             incrementButtonClass="p-button-text text-surface-600 dark:text-surface-200 hover:text-primary py-1 px-1"
                             incrementButtonIcon="pi pi-plus"
                             decrementButtonIcon="pi pi-minus"
+                            (ngModelChange)="updateBorrowAmount()"
                         ></p-inputNumber>
-                        <div class="flex items-center flex-0 lg:flex-1 gap-4">
-                            <button pButton pRipple label="Add to Cart" class="flex-shrink-0 w-full"></button>
-                            <i
-                                class="pi text-2xl cursor-pointer"
-                                [ngClass]="{
-                                    'pi-heart text-600': !liked,
-                                    'pi-heart-fill text-orange-500': liked
-                                }"
-                                (click)="liked = !liked"
-                            ></i>
+
+                    <div class="border-t border-surface-200 dark:border-surface-700 my-6"></div>
+
+                    <div class="font-bold text-surface-900 dark:text-surface-0 mb-4">Simulez votre paiement</div>
+
+                    <div class="space-y-6 mb-6">
+                    <div>
+                        <label for="interestRate" class="block text-sm font-semibold text-gray-800 dark:text-white mb-1">Marge bénéficiaire (HT)</label>
+                        <input
+                        id="interestRate"
+                        type="text"
+                        class="p-inputtext w-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg"
+                        value="{{calculatedInterest | number:'1.2-2'}} MAD"
+                        disabled
+                        />
+                    </div>
+
+                    <div>
+                        <label for="borrowAmount" class="block text-sm font-semibold text-gray-800 dark:text-white mb-2">Montant financé</label>
+                        <input
+                        id="borrowAmount"
+                        type="number"
+                        pInputText
+                        min="0"
+                        [max]="product.price * quantity"
+                        [(ngModel)]="borrowAmount"
+                        [value]="borrowAmount"
+                        class="w-full mb-2 rounded-lg p-2 border"
+                        (input)="onBorrowAmountChange($event)"
+                        />
+                        <div class="my-2">
+                            <p-slider
+                            min="0"
+                            [max]="product.price * quantity"
+                            [(ngModel)]="borrowAmount"
+                            (onChange)="updateInterest()"
+                            class="w-full"
+                            ></p-slider>
                         </div>
+                    </div>
+
+                    <div>
+                        <label for="months" class="block text-sm font-semibold text-gray-800 dark:text-white mb-2">Durée (en mois)</label>
+                        <input
+                        id="months"
+                        type="number"
+                        pInputText
+                        min="6"
+                        max="60"
+                        [(ngModel)]="months"
+                        [value]="months"
+                        class="w-full mb-2 rounded-lg p-2 border"
+                        (input)="onDurationChange($event)"
+                        />
+                        <div class="my-2">
+                        <p-slider
+                        min="6"
+                        max="60"
+                        [(ngModel)]="months"
+                        class="w-full"
+                        ></p-slider>
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="text-center bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300 p-3 rounded-lg mb-6">
+                        <p class="m-0">Paiement mensuel estimé:</p>
+                        <p class="font-bold text-2xl m-0">
+                            {{ calculateMonthlyPayment() }} MAD / mois
+                        </p>
+                    </div>
+
+                    <div class="font-bold text-surface-900 dark:text-surface-0 mb-4">Quantité</div>
+                    <div class="flex items-center flex-0 lg:flex-1 gap-4">
+                        <button pButton pRipple label="Résumé de la commande" class="flex-shrink-0 w-full" (click)="goToCart()"></button>
+                        <i
+                            class="pi text-2xl cursor-pointer"
+                            [ngClass]="{
+                                'pi-heart text-600': !liked,
+                                'pi-heart-fill text-orange-500': liked
+                            }"
+                            (click)="liked = !liked"
+                        ></i>
                     </div>
                 </div>
             </div>
@@ -153,7 +174,6 @@ import {TabsModule} from 'primeng/tabs';
                 <p-tablist>
                     <p-tab value="0">Details</p-tab>
                     <p-tab value="1">Reviews</p-tab>
-                    <p-tab value="2">Shipping and Returns</p-tab>
                 </p-tablist>
                 <p-tabpanels>
                     <p-tabpanel value="0">
@@ -244,51 +264,113 @@ import {TabsModule} from 'primeng/tabs';
                             </li>
                         </ul>
                     </p-tabpanel>
-                    <p-tabpanel value="2">
-                        <div class="text-surface-900 dark:text-surface-0 font-bold text-3xl mb-6 mt-2">Shipping Placeholder</div>
-                        <p class="leading-normal text-surface-600 dark:text-surface-200 p-0 mx-0 mt-0 mb-6">
-                            Mattis aliquam faucibus purus in massa tempor nec feugiat nisl. Justo donec enim diam vulputate ut pharetra. Tempus egestas sed sed risus. Feugiat sed lectus vestibulum mattis. Tristique nulla aliquet enim tortor at auctor
-                            urna nunc. Habitant morbi tristique senectus et. Facilisi nullam vehicula ipsum.
-                        </p>
-
-                        <div class="grid grid-cols-12 gap-4">
-                            <div class="col-span-12 md:col-span-6">
-                                <span class="text-surface-900 dark:text-surface-0 block font-bold mb-4">Shipping Costs</span>
-                                <ul class="py-0 pl-4 m-0 text-surface-600 dark:text-surface-200 mb-4">
-                                    <li class="mb-2">Japan - JPY 2,500.</li>
-                                    <li class="mb-2">Europe - EUR 10</li>
-                                    <li class="mb-2">Switzerland - CHF 10</li>
-                                    <li class="mb-2">Canada - CAD 25</li>
-                                    <li class="mb-2">USA - USD 20</li>
-                                    <li class="mb-2">Australia - AUD 30</li>
-                                    <li class="mb-2">United Kingdom - GBP 10</li>
-                                </ul>
-                            </div>
-                            <div class="col-span-12 md:col-span-6">
-                                <span class="text-surface-900 dark:text-surface-0 block font-bold mb-4">Return Policy</span>
-                                <p class="leading-normal text-surface-600 dark:text-surface-200 p-0 m-0">Pharetra et ultrices neque ornare aenean euismod elementum nisi. Diam phasellus vestibulum lorem sed. Mattis molestie a iaculis at.</p>
-                            </div>
-                        </div>
-                    </p-tabpanel>
                 </p-tabpanels>
             </p-tabs>
         </div>
     `
 })
-export class ProductOverview {
-    color: string = 'bluegray';
-
-    size: string = 'M';
+export class ProductOverview implements OnInit {
+    
+    productId: string = "";
+    product: Product = {
+        id: '',
+        name: '',
+        description: '',
+        price: 0,
+        category: '',
+        image: '',
+        rating: 0
+    };
+    
+    interest: number = 5;
+    months: number = 6;
+    quantity: number = 1;
+    borrowAmount: number = 0;
+    calculatedInterest: number = 0;
 
     liked: boolean = false;
-
-    images: string[] = [];
-
     selectedImageIndex: number = 0;
 
-    quantity: number = 1;
+    constructor(private route: ActivatedRoute, private productService: ProductService, private router: Router) {}
 
     ngOnInit(): void {
-        this.images = ['product-overview-3-1.png', 'product-overview-3-2.png', 'product-overview-3-3.png', 'product-overview-3-4.png'];
+        this.route.paramMap.subscribe(paramMap => {
+            this.productId = paramMap.get("id")!;
+            if (this.productId) {
+                this.productService.findById(this.productId).subscribe(product => {
+                    if (product) {
+                        this.product = product;
+                        this.borrowAmount = this.product.price;
+                        this.calculatedInterest = (this.interest / 100) * this.borrowAmount;
+                    }
+                });
+            }
+        });
+    }
+
+    updateBorrowAmount() {
+        this.borrowAmount = this.product.price * this.quantity;
+        this.updateInterest();
+    }
+
+    calculateMonthlyPayment() {
+        if (this.borrowAmount <= 0 || this.months <= 0) {
+            return 0;
+        }
+        const monthlyRate = this.interest / 100 / 12;
+        const monthlyPayment = (this.borrowAmount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -this.months));
+        return Number(monthlyPayment.toFixed(2));
+    }
+
+    goToCart() {
+        const productDetails = {
+            product: this.product,
+            quantity: this.quantity,
+            borrowAmount : this.borrowAmount,
+            months: this.months,
+            interest: this.calculatedInterest,
+            monthlyPayment: this.calculateMonthlyPayment()
+        }
+        this.router.navigate(['/ecommerce/paiement'], {state: productDetails});
+    }
+
+    onBorrowAmountChange(event: Event) {
+        const input = event.target as HTMLInputElement;
+        let value = parseInt(input.value);
+        const max = this.product.price * this.quantity;
+            if (value > max) {
+                input.value = String(max);
+                this.borrowAmount = max;
+                this.updateInterest();
+            }
+            else if (value < 1 || isNaN(value)) {
+                input.value = "0";
+                this.borrowAmount = 0;
+                this.updateInterest();
+            }
+            else {
+                this.borrowAmount = value;
+                this.updateInterest();
+            }
+    }
+
+    onDurationChange(event: Event) {
+        const input = event.target as HTMLInputElement;
+        let value = parseInt(input.value);
+        if (value > 60) {
+            input.value = "60";
+            this.months = 60;
+        }
+        else if (value < 6 || isNaN(value)) {
+            input.value = "6";
+            this.months = 6;
+        }
+        else {
+            this.months = value;
+        }
+    }
+
+    updateInterest() {
+        this.calculatedInterest = (this.interest / 100) * this.borrowAmount;
     }
 }

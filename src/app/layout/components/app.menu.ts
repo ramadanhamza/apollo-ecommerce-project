@@ -34,36 +34,36 @@ export class AppMenu {
                         icon: 'pi pi-fw pi-list',
                         routerLink: ['ecommerce/liste-produits'],
                     },
+                    // {
+                    //     label: 'Aperçu du produit',
+                    //     icon: 'pi pi-fw pi-image',
+                    //     routerLink: ['ecommerce/apercu-produit'],
+                    // },
                     {
-                        label: 'Aperçu du produit',
-                        icon: 'pi pi-fw pi-image',
-                        routerLink: ['ecommerce/apercu-produit'],
-                    },
-                    {
-                        label: 'Mes commandes',
+                        label: 'Mes dossiers',
                         icon: 'pi pi-fw pi-shopping-cart',
-                        routerLink: ['ecommerce/mes-commandes'],
+                        routerLink: ['ecommerce/mes-dossiers'],
                     },
-                    {
-                        label: 'Nouveau produit',
-                        icon: 'pi pi-fw pi-plus',
-                        routerLink: ['ecommerce/nouveau-produit'],
-                    },
-                    {
-                        label: 'Panier',
-                        icon: 'pi pi-fw pi-shopping-cart',
-                        routerLink: ['ecommerce/panier'],
-                    },
-                    {
-                        label: 'Paiement',
-                        icon: 'pi pi-fw pi-check-square',
-                        routerLink: ['ecommerce/paiement'],
-                    },
-                    {
-                        label: 'Résumé de la commande',
-                        icon: 'pi pi-fw pi-file',
-                        routerLink: ['ecommerce/resume-commande'],
-                    },
+                    // {
+                    //     label: 'Nouveau produit',
+                    //     icon: 'pi pi-fw pi-plus',
+                    //     routerLink: ['ecommerce/nouveau-produit'],
+                    // },
+                    // {
+                    //     label: 'Panier',
+                    //     icon: 'pi pi-fw pi-shopping-cart',
+                    //     routerLink: ['ecommerce/panier'],
+                    // },
+                    // {
+                    //     label: 'Paiement',
+                    //     icon: 'pi pi-fw pi-check-square',
+                    //     routerLink: ['ecommerce/paiement'],
+                    // },
+                    // {
+                    //     label: 'Résumé de la commande',
+                    //     icon: 'pi pi-fw pi-file',
+                    //     routerLink: ['ecommerce/resume-commande'],
+                    // },
                 ],
             }
         ];
