@@ -50,7 +50,7 @@ import { Router } from '@angular/router';
                     type="text" 
                     pInputText
                     [(ngModel)]="signatureText"
-                    placeholder="Tapez votre nom complet ici pour signer"
+                    placeholder="Saisir le code reçu par SMS"
                     class="font-signature md:text-3xl w-full p-2 border-0 border-b-2 border-surface-300 dark:border-surface-600 bg-transparent focus:ring-0 focus:border-primary"
                     [ngClass]="{'border-primary-500': signatureText}"
                 />
@@ -63,7 +63,7 @@ import { Router } from '@angular/router';
                 pButton 
                 type="button" 
                 icon="pi pi-check-square" 
-                label="Signer et valider" 
+                label="Valider" 
                 (click)="submitSignature()"
                 [disabled]="!hasAgreed || !signatureText"
                 class="w-full sm:w-auto">
@@ -80,8 +80,8 @@ import { Router } from '@angular/router';
               d="M9 12l2 2l4 -4M12 20c4.418 0 8 -3.582 8 -8s-3.582 -8 -8 -8s-8 3.582 -8 8s3.582 8 8 8z" />
       </svg>
     </div>
-    <h2 class="text-2xl font-bold text-green-600 mb-2">Promesse signée</h2>
-    <p class="text-green-700 text-md">La promesse a été <span class="font-semibold">validée et signée avec succès</span>.</p>
+    <h2 class="text-2xl font-bold text-green-600 mb-2">Promesse validée</h2>
+    <p class="text-green-700 text-md">La promesse a été <span class="font-semibold">validée avec succès</span>.</p>
   </div>
 </div>
 `
