@@ -67,12 +67,12 @@ import { Router } from '@angular/router';
                         <span class="font-bold text-surface-900 dark:text-surface-0">{{ checkoutData.months }} mois</span>
                     </li>
                     <li class="flex justify-between items-center">
-                        <span>Marge:</span>
+                        <span>Marge bénéficiaire:</span>
                         <span class="font-bold text-surface-900 dark:text-surface-0">{{ checkoutData.interest }} MAD</span>
                     </li>
                     <div class="text-primary pt-3 border-t border-surface-200 dark:border-surface-700">
                         <p class="text-lg text-center">Votre mensualité</p>
-                        <p class="font-bold text-xl text-center">{{ calculateLoan(checkoutData.borrowAmount, checkoutData.interest, checkoutData.months) }} MAD</p>
+                        <p class="font-bold text-xl text-center">{{ calculateLoan(checkoutData.borrowAmount, 5, checkoutData.months) }} MAD</p>
                     </div>
                 </ul>
             </div>
@@ -182,10 +182,11 @@ export class CheckoutForm implements OnInit {
         const monthlyRate = interest / 100 / 12;
         const monthlyPayment = (borrowAmount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
         return Number(monthlyPayment.toFixed(2));
+        
     }
 
     demarrerProcess() {
-        const monthlyPayment = this.calculateLoan(this.checkoutData.borrowAmount, this.checkoutData.interest, this.checkoutData.months);
+        const monthlyPayment = this.calculateLoan(this.checkoutData.borrowAmount, 5, this.checkoutData.months);
         const upfrontPayment = (this.checkoutData.product.price * this.checkoutData.quantity) - this.checkoutData.borrowAmount;
 
         const demandeRequest = {
