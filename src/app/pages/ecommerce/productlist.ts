@@ -43,7 +43,7 @@ import { ActivatedRoute, Router } from '@angular/router';
                                     <span class="text-primary text-xl font-medium block mb-1">{{ product.price }} MAD</span>
         </div>
                         <button
-                            (click)="goToProductCart(product.id)"
+                            (click)="gotoProductSummary(product.id)"
                             type="button"
                             pRipple
                                     class="border border-primary rounded py-2 px-4 bg-primary text-white inline-flex items-center justify-center hover:bg-primary-600 transition-colors duration-300 cursor-pointer w-full"
@@ -94,7 +94,7 @@ export class ProductList implements OnInit {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    goToProductCart(productId: string) {
-        this.router.navigate(['/ecommerce/apercu-produit/' + productId]);
+    gotoProductSummary(productId: string) {
+        this.router.navigate(['/ecommerce/sommaire-produit/' + productId]);
     }
 }

@@ -7,6 +7,12 @@ export default [
         redirectTo: 'liste-produits'
     },
     {
+        path: 'sommaire-produit/:id',
+        data: { breadcrumb: 'Sommaire du produit' },
+        title: 'Sommaire du produit',
+        loadComponent: () => import('./productsummary').then((c) => c.ProductSummary)
+    },
+    {
         path: 'apercu-produit/:id',
         data: { breadcrumb: 'Aperçu du produit' },
         title: 'Aperçu du produit',

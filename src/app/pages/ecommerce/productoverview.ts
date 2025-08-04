@@ -90,12 +90,23 @@ import {SliderModule} from 'primeng/slider';
 
                     <div class="space-y-6 mb-6">
                     <div>
-                        <label for="interestRate" class="block text-sm font-semibold text-gray-800 dark:text-white mb-1">Marge bénéficiaire (HT)</label>
+                        <label for="interestRate" class="block text-sm font-semibold text-gray-800 dark:text-white mb-1">Marge bénéficiaire</label>
                         <input
                         id="interestRate"
                         type="text"
                         class="p-inputtext w-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg"
                         value="{{calculatedInterest | number:'1.2-2'}} MAD"
+                        disabled
+                        />
+                    </div>
+
+                    <div>
+                        <label for="personalApport" class="block text-sm font-semibold text-gray-800 dark:text-white mb-1">Apport Personnel</label>
+                        <input
+                        id="personalApport"
+                        type="text"
+                        class="p-inputtext w-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg"
+                        value="{{personalApport | number:'1.2-2'}} MAD"
                         disabled
                         />
                     </div>
@@ -272,6 +283,7 @@ import {SliderModule} from 'primeng/slider';
 export class ProductOverview implements OnInit {
     
     productId: string = "";
+    products!: Product[];
     product: Product = {
         id: '',
         name: '',
@@ -286,6 +298,7 @@ export class ProductOverview implements OnInit {
     months: number = 6;
     quantity: number = 1;
     borrowAmount: number = 0;
+    personalApport: number = 0;
     calculatedInterest: number = 0;
 
     liked: boolean = false;
@@ -296,11 +309,23 @@ export class ProductOverview implements OnInit {
     ngOnInit(): void {
         this.route.paramMap.subscribe(paramMap => {
             this.productId = paramMap.get("id")!;
+            this.productService.findAllProducts().subscribe(
+                (p) => {
+                    this.products = p;
+                    this.product = this.products.find(p => p.id == this.productId)!;
+                    console.log(this.product);
+                    this.product.price = 154500;
+                    this.personalApport = this.product.price;
+                }, (error) => {
+                    console.error('Erreur lors de la récupération des produits :', error);
+                }
+            );
             if (this.productId) {
                 this.productService.findById(this.productId).subscribe(product => {
                     if (product) {
                         this.product = product;
                         this.borrowAmount = this.product.price;
+                        this.personalApport = this.product.price - this.borrowAmount;
                         this.calculatedInterest = (this.interest / 100) * this.borrowAmount;
                     }
                 });
@@ -372,5 +397,6 @@ export class ProductOverview implements OnInit {
 
     updateInterest() {
         this.calculatedInterest = (this.interest / 100) * this.borrowAmount;
+        this.personalApport = this.product.price - this.borrowAmount;
     }
 }

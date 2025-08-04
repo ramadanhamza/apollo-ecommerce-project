@@ -41,7 +41,87 @@ import { Router } from '@angular/router';
 <div class="card">
     <div class="grid grid-cols-12 gap-6 grid-nogutter">
         <div class="col-span-12 lg:col-span-7 h-full sm:p-6 p-0 md:p-8">
-            
+            <div class="border border-surface-200 dark:border-surface-700 rounded-lg p-0 mb-8">
+                <div class="grid grid-cols-2">
+                    <div class="p-4 border-r border-b border-surface-200 dark:border-surface-700">
+                        <p>Date : <span class="font-semibold">21/07/2021</span></p>
+                        <p class="font-bold">Échéance: 04/08/2021</p>
+                    </div>
+                    <div class="p-4 border-b border-surface-200 dark:border-surface-700 text-center flex items-center justify-center">
+                        <h3 class="text-lg font-bold text-surface-800 dark:text-surface-100">FACTURE PROFORMA N° 565</h3>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 text-sm">
+                    <div class="p-4 border-r border-b border-surface-200 dark:border-surface-700">
+                        <p class="font-bold mb-2 uppercase">Emetteur</p>
+                        <p class="font-semibold">AUTO AMANE; SARL</p>
+                        <p>55 BD CORNICHE</p>
+                        <p>TEL : 0522222222</p>
+                        <p>RC : 8656565656</p>
+                    </div>
+                    <div class="p-4 border-r border-b border-surface-200 dark:border-surface-700">
+                        <p class="font-bold mb-2 uppercase">Client</p>
+                        <p class="font-semibold">HAMZA RAMADAN</p>
+                    </div>
+                    <div class="p-4 border-b border-surface-200 dark:border-surface-700">
+                        <p class="font-bold mb-2 uppercase">Destinataire</p>
+                        <p class="font-semibold">DAR AL AMANE</p>
+                        <p>52 BD ABDELMOUMEN</p>
+                        <p>CASABLANCA</p>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="text-xs text-surface-700 uppercase bg-blue-100 dark:bg-blue-900/50 dark:text-surface-300">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">Désignation</th>
+                                <th scope="col" class="px-6 py-3 text-right">PRIX HT</th>
+                                <th scope="col" class="px-6 py-3 text-center">Remise</th>
+                                <th scope="col" class="px-6 py-3 text-center">Taux TVA</th>
+                                <th scope="col" class="px-6 py-3 text-right">TTC</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white border-b dark:bg-surface-800 dark:border-surface-700">
+                                <td class="px-6 py-4 font-medium text-surface-900 dark:text-white">Dacia Logan</td>
+                                <td class="px-6 py-4 text-right">135000</td>
+                                <td class="px-6 py-4 text-center">0%</td>
+                                <td class="px-6 py-4 text-center">10%</td>
+                                <td class="px-6 py-4 text-right font-semibold">148500</td>
+                            </tr>
+                            <tr class="bg-white border-b dark:bg-surface-800 dark:border-surface-700">
+                                <td class="px-6 py-4 font-medium text-surface-900 dark:text-white">Pienture métalisée</td>
+                                <td class="px-6 py-4 text-right">2000</td>
+                                <td class="px-6 py-4 text-center">0%</td>
+                                <td class="px-6 py-4 text-center">20%</td>
+                                <td class="px-6 py-4 text-right font-semibold">2400</td>
+                            </tr>
+                            <tr class="bg-white border-b dark:bg-surface-800 dark:border-surface-700">
+                                <td class="px-6 py-4 font-medium text-surface-900 dark:text-white">Frais immatricluation</td>
+                                <td class="px-6 py-4 text-right">3000</td>
+                                <td class="px-6 py-4 text-center">0%</td>
+                                <td class="px-6 py-4 text-center">20</td>
+                                <td class="px-6 py-4 text-right font-semibold">3600</td>
+                            </tr>
+                            <tr class="bg-white dark:bg-surface-800 dark:border-surface-700">
+                                <td class="px-6 py-4 font-bold text-surface-900 dark:text-white">TOTAL</td>
+                                <td class="px-6 py-4 text-right font-bold">140000</td>
+                                <td class="px-6 py-4 text-center"></td>
+                                <td class="px-6 py-4 text-center"></td>
+                                <td class="px-6 py-4 text-right font-extrabold text-lg">154500</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="p-4 border-t border-surface-200 dark:border-surface-700 flex justify-between items-center">
+                    <span class="font-bold text-lg">Dépôt pour réserver un véhicule</span>
+                    <span class="font-extrabold text-lg text-primary">1300 MAD</span>
+                </div>
+            </div>
+
             <div class="border border-surface-200 dark:border-surface-700 rounded-lg p-6 mb-8">
                 <div class="flex items-center justify-between mb-6">
                     <h2 class="text-surface-900 dark:text-surface-0 text-2xl font-medium m-0">
@@ -72,7 +152,7 @@ import { Router } from '@angular/router';
                     </li>
                     <div class="text-primary pt-3 border-t border-surface-200 dark:border-surface-700">
                         <p class="text-lg text-center">Votre mensualité</p>
-                        <p class="font-bold text-xl text-center">{{ calculateLoan(checkoutData.borrowAmount, checkoutData.interest, checkoutData.months) }} MAD</p>
+                        <p class="font-bold text-xl text-center">{{ checkoutData.monthlyPayment }} MAD</p>
                     </div>
                 </ul>
             </div>
@@ -136,8 +216,7 @@ import { Router } from '@angular/router';
     `
 })
 export class CheckoutForm implements OnInit {
-
-    checkoutData: any; 
+    checkoutData: any;
 
     value: string = '';
     checked: boolean = true;
@@ -176,16 +255,18 @@ export class CheckoutForm implements OnInit {
         });
         return pdfFiles.length === 3;
     }
-    
-    calculateLoan(borrowAmount: number, interest: number, months: number): number {
-        if (borrowAmount <= 0 || months <= 0) return 0;
+
+    calculateMonthlyPayment(borrowAmount: number, interest: number, months: number) {
+        if (borrowAmount <= 0 || months <= 0) {
+            return 0;
+        }
         const monthlyRate = interest / 100 / 12;
         const monthlyPayment = (borrowAmount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
         return Number(monthlyPayment.toFixed(2));
     }
 
     demarrerProcess() {
-        const monthlyPayment = this.calculateLoan(this.checkoutData.borrowAmount, this.checkoutData.interest, this.checkoutData.months);
+        const monthlyPayment = this.calculateMonthlyPayment(this.checkoutData.borrowAmount, this.checkoutData.interest, this.checkoutData.months);
         const upfrontPayment = (this.checkoutData.product.price * this.checkoutData.quantity) - this.checkoutData.borrowAmount;
 
         const demandeRequest = {
