@@ -117,8 +117,8 @@ import { Router } from '@angular/router';
                 </div>
 
                 <div class="p-4 border-t border-surface-200 dark:border-surface-700 flex justify-between items-center">
-                    <span class="font-bold text-lg">Dépôt pour réserver un véhicule</span>
-                    <span class="font-extrabold text-lg text-primary">1300 MAD</span>
+                    <span class="font-bold text-sm">Dépôt pour réserver un véhicule</span>
+                    <span class="font-extrabold text-sm text-primary">1300 MAD</span>
                 </div>
             </div>
 
@@ -282,6 +282,10 @@ export class CheckoutForm implements OnInit {
         const ficheDePaieFile = this.uploadedFiles.find(f => f.documentType === 'payslip')?.file;
         const releveBancaireFile = this.uploadedFiles.find(f => f.documentType === 'bank_statement')?.file;
 
+        this.messageService.add({
+            severity: 'success', summary: 'Succès', detail: 'La demande de financement a été envoyée avec succès',
+        });
+        
         this.financementService.demarrerDemandeFinancement(demandeRequest, cinFile, ficheDePaieFile, releveBancaireFile).subscribe(() => {
             this.messageService.add({
                 severity: 'success', summary: 'Succès', detail: 'La demande de financement a été envoyée avec succès',

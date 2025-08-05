@@ -160,15 +160,15 @@ import { Product } from '@/types/product';
         </div>
         
         <div class="xl:col-span-12 rounded-lg border border-surface-200 dark:border-surface-700 bg-surface-50 dark:bg-surface-800 p-4 flex justify-between items-center">
-             <span class="font-semibold text-lg text-surface-800 dark:text-surface-100">Dépôt pour réserver un véhicule</span>
-             <span class="font-bold text-lg text-primary">1300 MAD</span>
+             <span class="font-semibold text-sm text-surface-800 dark:text-surface-100">Dépôt pour réserver un véhicule</span>
+             <span class="font-bold text-sm text-primary">1300 MAD</span>
         </div>
         
         <div class="xl:col-span-12 text-center text-sm text-surface-500 dark:text-surface-400">
             Le montant du dépôt sera débité sur votre compte pour réserver votre voiture
         </div>
     </div>
-    <div class="flex justify-end">
+    <div class="flex justify-end mt-3">
             <button pButton pRipple label="Choisir voiture" icon="pi pi-check" class="p-button-success" (click)="goToProductOrder(product.id)"></button>
     </div>
 </div>
